@@ -1,0 +1,24 @@
+{
+  "name": "postcss-value-parser",
+  "version": "1.0.0",
+  "description": "Transforms css values into the tree",
+  "main": "lib/parser.js",
+  "files": [
+    "lib"
+  ],
+  "devDependencies": {
+    "eslint": "^1.1.0",
+    "tape": "^4.2.0"
+  },
+  "scripts": {
+    "lint": "eslint lib test",
+    "test": "npm run lint && tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/TrySound/postcss-value-parser.git"
+  },
+  "author": "Bogdan Chadkin <trysound@yandex.ru>",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/TrySound/postcss-value-parser"
+}
