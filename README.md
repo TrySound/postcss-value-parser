@@ -1,3 +1,5 @@
+[![Travis CI](https://travis-ci.org/TrySound/postcss-value-parser.svg)](https://travis-ci.org/TrySound/postcss-value-parser)
+
 # postcss-value-parser
 
 transforms css values into the tree
