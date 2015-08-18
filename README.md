@@ -61,6 +61,9 @@ Returns parsed value
   unit: 'rem'
 }
 ```
+### parser.stringify(nodes)
+
+Stringifies node and array of nodes
 
 ### var p = parser(value)
 
