@@ -4,7 +4,7 @@
 
 transforms css values into the tree
 
-# Usage
+## Usage
 
 ```js
 var parser = require('postcss-value-parser');
@@ -35,6 +35,14 @@ parser('rgba(233, 45, 66 ,.5)')
   .toString();
   // #E92D42
 ```
+
+## Node types
+
+- `{ type: 'word', value: 'any' }`
+- `{ type: 'string', value: 'string', quote: '"' || '\'' }`
+- `{ type: 'div', value: '/' || ',', before: ' ', after: ' ' }`
+- `{ type: 'space', value: ' ' }` space as a separator
+- `{ type: 'function', value: 'name', nodes: [] }`
 
 ## API
 
