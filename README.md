@@ -36,6 +36,21 @@ parser('rgba(233, 45, 66 ,.5)')
   // #E92D42
 ```
 
+### Prevent walking into function
+
+```js
+parser('url(some url) 50% 50%')
+  .walk(function (node) {
+    if(node.type === 'functon' && node.value === 'url') {
+      node.value = parser.stringify(node);
+      node.type = 'word';
+    } else {
+      // Your code
+    }
+  })
+  .toString();
+```
+
 ## Node types
 
 - `{ type: 'word', value: 'any' }`
