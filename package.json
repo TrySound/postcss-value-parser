@@ -1,6 +1,6 @@
 {
   "name": "postcss-value-parser",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Transforms css values into the tree",
   "main": "lib/parser.js",
   "files": [
