@@ -43,6 +43,22 @@ var tests = [{
             ]
         }
     ]
+}, {
+    message: 'Should correctly process background value',
+    fixture: 'url(/gfx/img/bg.jpg)',
+    expected: [
+        {
+            type: 'function',
+            value: 'url',
+            nodes: [
+                { type: 'word', value: 'gfx' },
+                { after: '', before: '', type: 'div', value: '/' },
+                { type: 'word', value: 'img' },
+                { after: '', before: '', type: 'div', value: '/' },
+                { type: 'word', value: 'bg.jpg' }
+            ]
+        }
+    ]
 }];
 
 test('Tokenize', function (t) {
