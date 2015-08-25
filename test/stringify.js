@@ -16,9 +16,14 @@ var tests = [
 ];
 
 test('Stringify', function (t) {
-    t.plan(tests.length);
+    t.plan(tests.length + 1);
 
     tests.forEach(function (opts) {
         t.equal(stringify(tokenize(opts.fixture)), opts.expected, opts.message);
     });
+
+    var tokens = tokenize(' rgba(12,  54, 65 ) ');
+    tokens[1].type = 'word';
+
+    t.equal(stringify(tokens), ' rgba ', 'Shouldn\'t process nodes of work type');
 });
