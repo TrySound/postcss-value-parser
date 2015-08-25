@@ -41,13 +41,10 @@ parser('rgba(233, 45, 66 ,.5)')
 ```js
 parser('url(some url) 50% 50%')
   .walk(function (node) {
+    // Your code
+
     if(node.type === 'functon' && node.value === 'url') {
-      node.nodes = [{
-        type: 'word',
-        value: parser.stringify(node.nodes)
-      }];
-    } else {
-      // Your code
+      return false;
     }
   })
   .toString();

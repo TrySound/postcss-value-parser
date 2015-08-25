@@ -15,7 +15,7 @@ test('Parser', function (t) {
     });
 
     t.test('walk', function (t) {
-        t.plan(2);
+        t.plan(4);
         var result;
 
 
@@ -58,6 +58,90 @@ test('Parser', function (t) {
                 nodes: []
             },
         ], 'should process all functions');
+
+
+        result = [];
+
+        parser('fn( ) fn2( fn3())').walk(function (node) {
+            if(node.type === 'function') {
+                result.push(node);
+                if(node.value === 'fn2') {
+                    return false;
+                }
+            }
+        });
+
+        t.deepEqual(result, [
+            {
+                type: 'function',
+                value: 'fn',
+                nodes: [
+                    {
+                        type: 'space',
+                        value: ' '
+                    }
+                ]
+            },
+            {
+                type: 'function',
+                value: 'fn2',
+                nodes: [
+                    {
+                        type: 'space',
+                        value: ' '
+                    }, {
+                        type: 'function',
+                        value: 'fn3',
+                        nodes: []
+                    }
+                ]
+            },
+        ], 'shouldn\'t process functions after falsy callback');
+
+
+        result = [];
+
+        parser('fn( ) fn2( fn3())').walk(function (node) {
+            if(node.type === 'function' && node.value === 'fn2') {
+                node.type = 'word';
+            }
+            result.push(node);
+        });
+
+        t.deepEqual(result, [
+            {
+                type: 'function',
+                value: 'fn',
+                nodes: [
+                    {
+                        type: 'space',
+                        value: ' '
+                    }
+                ]
+            },
+            {
+                type: 'space',
+                value: ' '
+            },
+            {
+                type: 'space',
+                value: ' '
+            },
+            {
+                type: 'word',
+                value: 'fn2',
+                nodes: [
+                    {
+                        type: 'space',
+                        value: ' '
+                    }, {
+                        type: 'function',
+                        value: 'fn3',
+                        nodes: []
+                    }
+                ]
+            },
+        ], 'shouldn\'t process nodes with defined non-function type');
 
 
         result = [];
