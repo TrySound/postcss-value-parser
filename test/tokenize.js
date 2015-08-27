@@ -51,11 +51,46 @@ var tests = [{
             type: 'function',
             value: 'url',
             nodes: [
+                { after: '', before: '', type: 'div', value: '/' },
                 { type: 'word', value: 'gfx' },
                 { after: '', before: '', type: 'div', value: '/' },
                 { type: 'word', value: 'img' },
                 { after: '', before: '', type: 'div', value: '/' },
                 { type: 'word', value: 'bg.jpg' }
+            ]
+        }
+    ]
+}, {
+    message: 'Should correctly process nested calc functions',
+    fixture: 'calc(((768px - 100vw) / 2) - 15px)',
+    expected: [
+        {
+            type: 'function',
+            value: 'calc',
+            nodes: [
+                {
+                    type: 'function',
+                    value: '',
+                    nodes: [
+                        {
+                            type: 'function',
+                            value: '',
+                            nodes: [
+                                { type: 'word', value: '768px' },
+                                { type: 'space', value: ' ' },
+                                { type: 'word', value: '-' },
+                                { type: 'space', value: ' ' },
+                                { type: 'word', value: '100vw' }
+                            ]
+                        },
+                        { type: 'div', value: '/', before: ' ', after: ' ' },
+                        { type: 'word', value: '2' }
+                    ]
+                },
+                { type: 'space', value: ' ' },
+                { type: 'word', value: '-' },
+                { type: 'space', value: ' ' },
+                { type: 'word', value: '15px' }
             ]
         }
     ]
