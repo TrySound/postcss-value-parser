@@ -54,7 +54,7 @@ parser('url(some url) 50% 50%')
 
 - `{ type: 'word', value: 'any' }`
 - `{ type: 'string', value: 'string', quote: '"' || '\'' }`
-- `{ type: 'div', value: '/' || ',', before: ' ', after: ' ' }`
+- `{ type: 'div', value: '/' || ',' || ':', before: ' ', after: ' ' }`
 - `{ type: 'space', value: ' ' }` space as a separator
 - `{ type: 'function', value: 'name', nodes: [] }`
 
@@ -75,6 +75,11 @@ Returns parsed value
   unit: 'rem'
 }
 ```
+
+### parser.trim(nodes)
+
+Trims space nodes (modifies original array and returns reference on it)
+
 ### parser.stringify(nodes)
 
 Stringifies node and array of nodes

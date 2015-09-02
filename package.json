@@ -11,8 +11,7 @@
     "tape": "^4.2.0"
   },
   "scripts": {
-    "lint": "eslint lib test",
-    "test": "npm run lint && tape test/*.js"
+    "test": "eslint lib test && tape test/*.js"
   },
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
   "license": "MIT",
