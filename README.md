@@ -2,7 +2,7 @@
 
 # postcss-value-parser
 
-transforms css values into the tree
+Transforms css values and at-rule params into the tree
 
 ## Usage
 
