@@ -96,58 +96,27 @@ var tests = [{
     ]
 }, {
     message: 'Should process colons with params',
-    fixture: '(min-width: 700px) and (orientation: landscape)',
+    fixture: '(min-width: 700px) and (orientation: \\$landscape)',
     expected: [
         {
             type: 'function',
             value: '',
             nodes: [
-                {
-                    type: 'word',
-                    value: 'min-width'
-                },
-                {
-                    type: 'div',
-                    value: ':',
-                    before: '',
-                    after: ' '
-                },
-                {
-                    type: 'word',
-                    value: '700px'
-                }
+                { type: 'word', value: 'min-width' },
+                { type: 'div', value: ':', before: '', after: ' ' },
+                { type: 'word', value: '700px' }
             ]
         },
-        {
-            type: 'space',
-            value: ' '
-        },
-        {
-            type: 'word',
-            value: 'and'
-        },
-        {
-            type: 'space',
-            value: ' '
-        },
+        { type: 'space', value: ' ' },
+        { type: 'word', value: 'and' },
+        { type: 'space', value: ' ' },
         {
             type: 'function',
             value: '',
             nodes: [
-                {
-                    type: 'word',
-                    value: 'orientation'
-                },
-                {
-                    type: 'div',
-                    value: ':',
-                    before: '',
-                    after: ' '
-                },
-                {
-                    type: 'word',
-                    value: 'landscape'
-                }
+                { type: 'word', value: 'orientation' },
+                { type: 'div', value: ':', before: '', after: ' ' },
+                { type: 'word', value: '\\$landscape' }
             ]
         }
     ]
