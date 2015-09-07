@@ -120,6 +120,53 @@ var tests = [{
             ]
         }
     ]
+}, {
+    message: 'Should escape parentheses with backslash',
+    fixture: 'url(http://website.com/assets\\)_test)',
+    expected: [
+        {
+            type: 'function',
+            value: 'url',
+            nodes: [
+                {
+                    type: 'word',
+                    value: 'http'
+                },
+                {
+                    type: 'div',
+                    value: ':',
+                    before: '',
+                    after: ''
+                },
+                {
+                    type: 'div',
+                    value: '/',
+                    before: '',
+                    after: ''
+                },
+                {
+                    type: 'div',
+                    value: '/',
+                    before: '',
+                    after: ''
+                },
+                {
+                    type: 'word',
+                    value: 'website.com'
+                },
+                {
+                    type: 'div',
+                    value: '/',
+                    before: '',
+                    after: ''
+                },
+                {
+                    type: 'word',
+                    value: 'assets\\)_test'
+                }
+            ]
+        }
+    ]
 }];
 
 test('Tokenize', function (t) {
