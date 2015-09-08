@@ -8,10 +8,11 @@
   ],
   "devDependencies": {
     "eslint": "^1.1.0",
+    "tap-spec": "^4.1.0",
     "tape": "^4.2.0"
   },
   "scripts": {
-    "test": "eslint lib test && tape test/*.js"
+    "test": "eslint lib test && tape test/*.js | tap-spec"
   },
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
   "license": "MIT",

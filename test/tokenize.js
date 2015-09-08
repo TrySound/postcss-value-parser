@@ -167,6 +167,51 @@ var tests = [{
             ]
         }
     ]
+}, {
+    message: 'Should parse parentheses correctly',
+    fixture: 'fn1(fn2(255), fn3(.2)), fn4(fn5(255,.2), fn6)',
+    expected: [
+        {
+            type: 'function',
+            value: 'fn1',
+            nodes: [
+                {
+                    type: 'function',
+                    value: 'fn2',
+                    nodes: [
+                        { type: 'word', value: '255' }
+                    ]
+                },
+                { type: 'div', value: ',', before: '', after: ' ' },
+                {
+                    type: 'function',
+                    value: 'fn3',
+                    nodes: [
+                        { type: 'word', value: '.2' }
+                    ]
+                },
+            ]
+        },
+        { type: 'div', value: ',', before: '', after: ' ' },
+        {
+            type: 'function',
+            value: 'fn4',
+            nodes:
+            [
+                {
+                    type: 'function',
+                    value: 'fn5',
+                    nodes: [
+                        { type: 'word', value: '255' },
+                        { type: 'div', value: ',', before: '', after: '' },
+                        { type: 'word', value: '.2' }
+                    ]
+                },
+                { type: 'div', value: ',', before: '', after: ' '},
+                { type: 'word', value: 'fn6' }
+            ]
+        }
+    ]
 }];
 
 test('Tokenize', function (t) {
