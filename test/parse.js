@@ -1,5 +1,5 @@
 var test = require('tape');
-var tokenize = require('../lib/tokenize');
+var parse = require('../lib/parse');
 
 var tests = [{
     message: 'Should correctly process empty input',
@@ -214,10 +214,10 @@ var tests = [{
     ]
 }];
 
-test('Tokenize', function (t) {
+test('Parse', function (t) {
     t.plan(tests.length);
 
     tests.forEach(function (opts) {
-        t.deepEqual(tokenize(opts.fixture), opts.expected, opts.message);
+        t.deepEqual(parse(opts.fixture), opts.expected, opts.message);
     });
 });

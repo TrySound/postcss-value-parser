@@ -1,7 +1,7 @@
 var test = require('tape');
-var parser = require('../lib/parser');
+var parser = require('..');
 
-test('Parser', function (t) {
+test('ValueParser', function (t) {
     t.test('i/o', function (t) {
         var tests = [
             ' rgba( 34 , 45 , 54, .5 ) ',
