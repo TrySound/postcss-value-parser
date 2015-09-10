@@ -43,7 +43,7 @@ parser('url(some url) 50% 50%')
   .walk(function (node) {
     // Your code
 
-    if(node.type === 'functon' && node.value === 'url') {
+    if (node.type === 'function' && node.value === 'url') {
       return false;
     }
   })
