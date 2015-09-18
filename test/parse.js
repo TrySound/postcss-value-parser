@@ -2,11 +2,11 @@ var test = require('tape');
 var parse = require('../lib/parse');
 
 var tests = [{
-    message: 'Should correctly process empty input',
+    message: 'should correctly process empty input',
     fixture: '',
     expected: []
 }, {
-    message: 'Should correctly proceess font value',
+    message: 'should correctly proceess font value',
     fixture: 'bold italic 12px \t /3 \'Open Sans\', Arial, "Helvetica Neue", sans-serif',
     expected: [
         { type: 'word',   value: 'bold' },
@@ -26,7 +26,7 @@ var tests = [{
         { type: 'word',   value: 'sans-serif' },
     ]
 }, {
-    message: 'Should correctly proceess color value',
+    message: 'should correctly proceess color value',
     fixture: 'rgba( 29, 439 , 29 )',
     expected: [
         {
@@ -44,7 +44,7 @@ var tests = [{
         }
     ]
 }, {
-    message: 'Should correctly process background value',
+    message: 'should correctly process background value',
     fixture: 'url(/gfx/img/bg.jpg)',
     expected: [
         {
@@ -61,7 +61,7 @@ var tests = [{
         }
     ]
 }, {
-    message: 'Should correctly process nested calc functions',
+    message: 'should correctly process nested calc functions',
     fixture: 'calc(((768px - 100vw) / 2) - 15px)',
     expected: [
         {
@@ -95,7 +95,7 @@ var tests = [{
         }
     ]
 }, {
-    message: 'Should process colons with params',
+    message: 'should process colons with params',
     fixture: '(min-width: 700px) and (orientation: \\$landscape)',
     expected: [
         {
@@ -121,7 +121,7 @@ var tests = [{
         }
     ]
 }, {
-    message: 'Should escape parentheses with backslash',
+    message: 'should escape parentheses with backslash',
     fixture: 'url(http://website.com/assets\\)_test)',
     expected: [
         {
@@ -168,7 +168,7 @@ var tests = [{
         }
     ]
 }, {
-    message: 'Should parse parentheses correctly',
+    message: 'should parse parentheses correctly',
     fixture: 'fn1(fn2(255), fn3(.2)), fn4(fn5(255,.2), fn6)',
     expected: [
         {
@@ -211,6 +211,32 @@ var tests = [{
                 { type: 'word', value: 'fn6' }
             ]
         }
+    ]
+}, {
+    message: 'shouldn\'t throw an error on unclosed function',
+    fixture: '(0 32 word',
+    expected: [
+        {
+            type: 'function',
+            value: '',
+            nodes: [
+                { type: 'word', value: '0' },
+                { type: 'space', value: ' ' },
+                { type: 'word', value: '32' },
+                { type: 'space', value: ' ' },
+                { type: 'word', value: 'word' }
+            ]
+        }
+    ]
+}, {
+    message: 'shouldn\'t throw an error on unopened function',
+    fixture: '0 32 word)',
+    expected: [
+        { type: 'word', value: '0' },
+        { type: 'space', value: ' ' },
+        { type: 'word', value: '32' },
+        { type: 'space', value: ' ' },
+        { type: 'word', value: 'word' }
     ]
 }];
 
