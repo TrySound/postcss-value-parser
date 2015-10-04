@@ -71,10 +71,10 @@ var tests = [{
     ]
 }, {
     message: 'should process advanced nested functions',
-    fixture: '( url(( ) ))word',
+    fixture: '( calc(( ) ))word',
     expected: [
         { type: 'function', value: '', before: ' ', after: '', nodes: [
-            { type: 'function', value: 'url', before: '', after: ' ', nodes: [
+            { type: 'function', value: 'calc', before: '', after: ' ', nodes: [
                 { type: 'function', value: '', before: ' ', after: '', nodes: [] }
             ] }
         ] },
@@ -324,13 +324,24 @@ var tests = [{
     message: 'shouldn\'t throw an error on unclosed function',
     fixture: '(0 32 word ',
     expected: [
-        { type: 'function', value: '', before: '', after: '', nodes: [
+        { type: 'function', value: '', before: '', after: '', unclosed: true, nodes: [
             { type: 'word', value: '0' },
             { type: 'space', value: ' ' },
             { type: 'word', value: '32' },
             { type: 'space', value: ' ' },
             { type: 'word', value: 'word' },
             { type: 'space', value: ' ' }
+        ] }
+    ]
+}, {
+    message: 'should add unclosed: true prop for every unclosed function',
+    fixture: '( ( ( ) ',
+    expected: [
+        { type: 'function', value: '', before: ' ', after: '', unclosed: true, nodes: [
+            { type: 'function', value: '', before: ' ', after: '', unclosed: true, nodes: [
+                { type: 'function', value: '', before: ' ', after: '', nodes: [] },
+                { type: 'space', value: ' ' }
+            ] }
         ] }
     ]
 }, {
