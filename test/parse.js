@@ -159,13 +159,13 @@ var tests = [{
     message: 'should process unclosed quotes',
     fixture: '"word',
     expected: [
-        { type: 'string', value: 'word', quote: '"' }
+        { type: 'string', value: 'word', quote: '"', unclosed: true }
     ]
 }, {
     message: 'should process unclosed quotes with ended backslash',
     fixture: '"word\\',
     expected: [
-        { type: 'string', value: 'word\\', quote: '"' }
+        { type: 'string', value: 'word\\', quote: '"', unclosed: true }
     ]
 }, {
     message: 'should process quoted strings',
