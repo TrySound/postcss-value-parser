@@ -13,6 +13,8 @@ var parser = require('postcss-value-parser');
     nodes: [
       type: 'function',
       value: 'rgba',
+      before: '',
+      after: '',
       nodes: [
         { type: 'word', value: '233' },
         { type: 'div', value: ',', before: '', after: ' ' },
