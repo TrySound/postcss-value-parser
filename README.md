@@ -24,16 +24,18 @@ var parser = require('postcss-value-parser');
       ]
     ]
   }*/
-parser('rgba(233, 45, 66 ,.5)').walk('rgba', function (fn) {
-    var color = fn.nodes.filter(function (node) {
+parser('rgba(233, 45, 66 ,.5)').walk(function (node) {
+  if (node.type === 'function' && node.value === 'rgba') {
+    var color = node.nodes.filter(function (node) {
       return node.type === 'word';
     }).map(function (node) {
       return Number(node.value);
     }); // [233, 45, 66, .5]
 
-    fn.type = 'word';
-    fn.value = convertToHex(color);
-  }).toString(); // #E92D42
+    node.type = 'word';
+    node.value = convertToHex(color);
+  }
+}).toString(); // #E92D42
 ```
 
 ### Prevent walking into function
