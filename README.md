@@ -50,6 +50,26 @@ parser('url(some url) 50% 50%')
   .toString();
 ```
 
+### Url node
+
+```
+url( /path/to/image )
+```
+
+will be parsed to
+
+```js
+[{
+  type: 'function',
+  value: 'url',
+  before: ' ',
+  after: ' ',
+  nodes: [
+    { type: 'word', value: '/path/to/image' }
+  ]
+}]
+```
+
 ## Node types
 
 - `{ type: 'word', value: 'any' }`

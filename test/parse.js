@@ -231,15 +231,29 @@ var tests = [{
     ]
 }, {
     message: 'should correctly process url function',
-    fixture: 'url(/gfx/img/bg.jpg)',
+    fixture: 'url( /gfx/img/bg.jpg )',
     expected: [
-        { type: 'function', value: 'url', before: '', after: '', nodes: [
-            { after: '', before: '', type: 'div', value: '/' },
-            { type: 'word', value: 'gfx' },
-            { after: '', before: '', type: 'div', value: '/' },
-            { type: 'word', value: 'img' },
-            { after: '', before: '', type: 'div', value: '/' },
-            { type: 'word', value: 'bg.jpg' }
+        { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
+            { type: 'word', value: '/gfx/img/bg.jpg' }
+        ] }
+    ]
+}, {
+    message: 'should add unclosed: true prop for url function',
+    fixture: 'url( /gfx/img/bg.jpg ',
+    expected: [
+        { type: 'function', value: 'url', before: ' ', after: '', unclosed: true, nodes: [
+            { type: 'word', value: '/gfx/img/bg.jpg' },
+            { type: 'space', value: ' ' }
+        ] }
+    ]
+}, {
+    message: 'should correctly process url function with quoted first argument',
+    fixture: 'url( "/gfx/img/bg.jpg" hello )',
+    expected: [
+        { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
+            { type: 'string', quote: '"', value: '/gfx/img/bg.jpg' },
+            { type: 'space', value: ' ' },
+            { type: 'word', value: 'hello' }
         ] }
     ]
 }, {
@@ -284,16 +298,10 @@ var tests = [{
     ]
 }, {
     message: 'should escape parentheses with backslash',
-    fixture: 'url(http://website.com/assets\\)_test)',
+    fixture: 'url( http://website.com/assets\\)_test )',
     expected: [
-        { type: 'function', value: 'url', before: '', after: '', nodes: [
-            { type: 'word', value: 'http' },
-            { type: 'div', value: ':', before: '', after: '' },
-            { type: 'div', value: '/', before: '', after: '' },
-            { type: 'div', value: '/', before: '', after: '' },
-            { type: 'word', value: 'website.com' },
-            { type: 'div', value: '/', before: '', after: '' },
-            { type: 'word', value: 'assets\\)_test' }
+        { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
+            { type: 'word', value: 'http://website.com/assets\\)_test' }
         ] }
     ]
 }, {
