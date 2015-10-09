@@ -371,6 +371,18 @@ var tests = [{
     expected: [
         { type: 'word', value: 'Bond\\ 007' }
     ]
+}, {
+    message: 'should parse double url and comma',
+    fixture: 'url(foo/bar.jpg), url(http://website.com/img.jpg)',
+    expected: [
+        { type: 'function', value: 'url', before: '', after: '', nodes: [
+            { type: 'word', value: 'foo/bar.jpg' }
+        ] },
+        { type: 'div', value: ',', before: '', after: ' ' },
+        { type: 'function', value: 'url', before: '', after: '', nodes: [
+            { type: 'word', value: 'http://website.com/img.jpg' }
+        ] },
+    ]
 }];
 
 test('Parse', function (t) {
