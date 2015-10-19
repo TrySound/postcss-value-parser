@@ -84,40 +84,40 @@ var tests = [{
     message: 'should process divider (/)',
     fixture: '/',
     expected: [
-        { type: 'div', value: '/', before: '', after: '' }
+        { type: 'div', sourceIndex: 0, value: '/', before: '', after: '' }
     ]
 }, {
     message: 'should process divider (:)',
     fixture: ':',
     expected: [
-        { type: 'div', value: ':', before: '', after: '' }
+        { type: 'div', sourceIndex: 0, value: ':', before: '', after: '' }
     ]
 }, {
     message: 'should process divider (,)',
     fixture: ',',
     expected: [
-        { type: 'div', value: ',', before: '', after: '' }
+        { type: 'div', sourceIndex: 0, value: ',', before: '', after: '' }
     ]
 }, {
     message: 'should process complex divider',
     fixture: ' , ',
     expected: [
-        { type: 'div', value: ',', before: ' ', after: ' ' }
+        { type: 'div', sourceIndex: 0, value: ',', before: ' ', after: ' ' }
     ]
 }, {
     message: 'should process divider in function',
     fixture: '( , )',
     expected: [
         { type: 'function', sourceIndex: 0, value: '', before: ' ', after: ' ', nodes: [
-            { type: 'div', value: ',', before: '', after: '' }
+            { type: 'div', sourceIndex: 2, value: ',', before: '', after: '' }
         ] }
     ]
 }, {
     message: 'should process two spaced divider',
     fixture: ' , : ',
     expected: [
-        { type: 'div', value: ',', before: ' ', after: ' ' },
-        { type: 'div', value: ':', before: '', after: ' ' }
+        { type: 'div', sourceIndex: 0, value: ',', before: ' ', after: ' ' },
+        { type: 'div', sourceIndex: 3, value: ':', before: '', after: ' ' }
     ]
 }, {
     message: 'should process empty quoted strings (")',
@@ -206,15 +206,15 @@ var tests = [{
         { type: 'word', sourceIndex: 5, value: 'italic' },
         { type: 'space', sourceIndex: 11, value: ' ' },
         { type: 'word', sourceIndex: 12, value: '12px' },
-        { type: 'div', value: '/' , before: ' \t ', after: '' },
+        { type: 'div', sourceIndex: 16, value: '/' , before: ' \t ', after: '' },
         { type: 'word', sourceIndex: 20, value: '3' },
         { type: 'space', sourceIndex: 21, value: ' ' },
         { type: 'string', sourceIndex: 22, value: 'Open Sans', quote: '\'' },
-        { type: 'div', value: ',', before: '', after: ' ' },
+        { type: 'div', sourceIndex: 33, value: ',', before: '', after: ' ' },
         { type: 'word', sourceIndex: 35, value: 'Arial' },
-        { type: 'div', value: ',', before: '', after: ' ' },
+        { type: 'div', sourceIndex: 40, value: ',', before: '', after: ' ' },
         { type: 'string', sourceIndex: 42, value: 'Helvetica Neue', quote: '"' },
-        { type: 'div', value: ',', before: '', after: ' ' },
+        { type: 'div', sourceIndex: 58, value: ',', before: '', after: ' ' },
         { type: 'word', sourceIndex: 60, value: 'sans-serif' },
     ]
 }, {
@@ -223,9 +223,9 @@ var tests = [{
     expected: [
         { type: 'function', sourceIndex: 0, value: 'rgba', before: ' ', after: ' ', nodes: [
             { type: 'word', sourceIndex: 6, value: '29' },
-            { type: 'div', value: ',', before: '', after: ' ' },
+            { type: 'div', sourceIndex: 8, value: ',', before: '', after: ' ' },
             { type: 'word', sourceIndex: 10, value: '439' },
-            { type: 'div', value: ',', before: ' ', after: ' ' },
+            { type: 'div', sourceIndex: 13, value: ',', before: ' ', after: ' ' },
             { type: 'word', sourceIndex: 16, value: '29' },
         ] }
     ]
@@ -269,7 +269,7 @@ var tests = [{
                     { type: 'space', sourceIndex: 14, value: ' ' },
                     { type: 'word', sourceIndex: 15, value: '100vw' }
                 ] },
-                { type: 'div', value: '/', before: ' ', after: ' ' },
+                { type: 'div', sourceIndex: 21, value: '/', before: ' ', after: ' ' },
                 { type: 'word', sourceIndex: 24, value: '2' }
             ] },
             { type: 'space', sourceIndex: 26, value: ' ' },
@@ -284,7 +284,7 @@ var tests = [{
     expected: [
         { type: 'function', sourceIndex: 0, value: '', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 1, value: 'min-width' },
-            { type: 'div', value: ':', before: '', after: ' ' },
+            { type: 'div', sourceIndex: 10, value: ':', before: '', after: ' ' },
             { type: 'word', sourceIndex: 12, value: '700px' }
         ] },
         { type: 'space', sourceIndex: 18, value: ' ' },
@@ -292,7 +292,7 @@ var tests = [{
         { type: 'space', sourceIndex: 22, value: ' ' },
         { type: 'function', sourceIndex: 23, value: '', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 24, value: 'orientation' },
-            { type: 'div', value: ':', before: '', after: ' ' },
+            { type: 'div', sourceIndex: 35, value: ':', before: '', after: ' ' },
             { type: 'word', sourceIndex: 37, value: '\\$landscape' }
         ] }
     ]
@@ -312,19 +312,19 @@ var tests = [{
             { type: 'function', sourceIndex: 4, value: 'fn2', before: '', after: '', nodes: [
                 { type: 'word', sourceIndex: 8, value: '255' }
             ] },
-            { type: 'div', value: ',', before: '', after: ' ' },
+            { type: 'div', sourceIndex: 12, value: ',', before: '', after: ' ' },
             { type: 'function', sourceIndex: 14, value: 'fn3', before: '', after: '', nodes: [
                 { type: 'word', sourceIndex: 18, value: '.2' }
             ] },
         ] },
-        { type: 'div', value: ',', before: '', after: ' ' },
+        { type: 'div', sourceIndex: 22, value: ',', before: '', after: ' ' },
         { type: 'function', sourceIndex: 24, value: 'fn4', before: '', after: '', nodes: [
             { type: 'function', sourceIndex: 28, value: 'fn5', before: '', after: '', nodes: [
                 { type: 'word', sourceIndex: 32, value: '255' },
-                { type: 'div', value: ',', before: '', after: '' },
+                { type: 'div', sourceIndex: 35, value: ',', before: '', after: '' },
                 { type: 'word', sourceIndex: 36, value: '.2' }
             ] },
-            { type: 'div', value: ',', before: '', after: ' '},
+            { type: 'div', sourceIndex: 39, value: ',', before: '', after: ' '},
             { type: 'word', sourceIndex: 41, value: 'fn6' }
         ] }
     ]
@@ -378,7 +378,7 @@ var tests = [{
         { type: 'function', sourceIndex: 0, value: 'url', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 4, value: 'foo/bar.jpg' }
         ] },
-        { type: 'div', value: ',', before: '', after: ' ' },
+        { type: 'div', sourceIndex: 16, value: ',', before: '', after: ' ' },
         { type: 'function', sourceIndex: 18, value: 'url', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 22, value: 'http://website.com/img.jpg' }
         ] },
