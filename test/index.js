@@ -28,11 +28,11 @@ test('ValueParser', function (t) {
         });
 
         t.deepEqual(result, [
-            { type: 'function', value: 'fn', before: ' ', after: '', nodes: [] },
-            { type: 'function', value: 'fn2', before: ' ', after: '', nodes: [
-                { type: 'function', value: 'fn3', before: '', after: '', nodes: [] }
+            { type: 'function', sourceIndex: 0, value: 'fn', before: ' ', after: '', nodes: [] },
+            { type: 'function', sourceIndex: 6, value: 'fn2', before: ' ', after: '', nodes: [
+                { type: 'function', sourceIndex: 11, value: 'fn3', before: '', after: '', nodes: [] }
             ] },
-            { type: 'function', value: 'fn3', before: '', after: '', nodes: [] },
+            { type: 'function', sourceIndex: 11, value: 'fn3', before: '', after: '', nodes: [] },
         ], 'should process all functions');
 
 
@@ -48,9 +48,9 @@ test('ValueParser', function (t) {
         });
 
         t.deepEqual(result, [
-            { type: 'function', value: 'fn', before: ' ', after: '', nodes: [] },
-            { type: 'function', value: 'fn2', before: ' ', after: '', nodes: [
-                { type: 'function', value: 'fn3', before: '', after: '', nodes: [] }
+            { type: 'function', sourceIndex: 0, value: 'fn', before: ' ', after: '', nodes: [] },
+            { type: 'function', sourceIndex: 6, value: 'fn2', before: ' ', after: '', nodes: [
+                { type: 'function', sourceIndex: 11, value: 'fn3', before: '', after: '', nodes: [] }
             ] },
         ], 'shouldn\'t process functions after falsy callback');
 
@@ -65,10 +65,10 @@ test('ValueParser', function (t) {
         });
 
         t.deepEqual(result, [
-            { type: 'function', value: 'fn', before: ' ', after: '', nodes: [] },
-            { type: 'space', value: ' '},
-            { type: 'word', value: 'fn2', before: ' ', after: '', nodes: [
-                { type: 'function', value: 'fn3', before: '', after: '', nodes: [] }
+            { type: 'function', sourceIndex: 0, value: 'fn', before: ' ', after: '', nodes: [] },
+            { type: 'space', sourceIndex: 5, value: ' '},
+            { type: 'word', sourceIndex: 6, value: 'fn2', before: ' ', after: '', nodes: [
+                { type: 'function', sourceIndex: 11, value: 'fn3', before: '', after: '', nodes: [] }
             ] },
         ], 'shouldn\'t process nodes with defined non-function type');
 
@@ -82,9 +82,9 @@ test('ValueParser', function (t) {
         }, true);
 
         t.deepEqual(result, [
-            { type: 'function', value: 'fn3', before: '', after: '', nodes: [] },
-            { type: 'function', value: 'fn2', before: ' ', after: '', nodes: [
-                { type: 'function', value: 'fn3', before: '', after: '', nodes: [] }
+            { type: 'function', sourceIndex: 5, value: 'fn3', before: '', after: '', nodes: [] },
+            { type: 'function', sourceIndex: 0, value: 'fn2', before: ' ', after: '', nodes: [
+                { type: 'function', sourceIndex: 5, value: 'fn3', before: '', after: '', nodes: [] }
             ] },
         ], 'should process all functions with reverse mode');
     });
