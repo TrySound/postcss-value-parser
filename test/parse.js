@@ -35,7 +35,7 @@ var tests = [{
     message: 'should process unopened parentheses as word',
     fixture: '() )wo)rd)',
     expected: [
-        { type: 'function', value: '', before: '', after: '', nodes: [] },
+        { type: 'function', sourceIndex: 0, value: '', before: '', after: '', nodes: [] },
         { type: 'space', sourceIndex: 2, value: ' ' },
         { type: 'word', sourceIndex: 3, value: ')wo)rd)' }
     ]
@@ -43,13 +43,13 @@ var tests = [{
     message: 'should add before prop',
     fixture: '( )',
     expected: [
-        { type: 'function', value: '', before: ' ', after: '', nodes: [] }
+        { type: 'function', sourceIndex: 0, value: '', before: ' ', after: '', nodes: [] }
     ]
 }, {
     message: 'should add before and after prop',
     fixture: '( | )',
     expected: [
-        { type: 'function', value: '', before: ' ', after: ' ', nodes: [
+        { type: 'function', sourceIndex: 0, value: '', before: ' ', after: ' ', nodes: [
             { type: 'word', sourceIndex: 2, value: '|' }
         ] }
     ]
@@ -57,15 +57,15 @@ var tests = [{
     message: 'should add value prop',
     fixture: 'name()',
     expected: [
-        { type: 'function', value: 'name', before: '', after: '', nodes: [] }
+        { type: 'function', sourceIndex: 0, value: 'name', before: '', after: '', nodes: [] }
     ]
 }, {
     message: 'should process nested functions',
     fixture: '((()))',
     expected: [
-        { type: 'function', value: '', before: '', after: '', nodes: [
-            { type: 'function', value: '', before: '', after: '', nodes: [
-                { type: 'function', value: '', before: '', after: '', nodes: [] }
+        { type: 'function', sourceIndex: 0, value: '', before: '', after: '', nodes: [
+            { type: 'function', sourceIndex: 1, value: '', before: '', after: '', nodes: [
+                { type: 'function', sourceIndex: 2, value: '', before: '', after: '', nodes: [] }
             ] }
         ] }
     ]
@@ -73,9 +73,9 @@ var tests = [{
     message: 'should process advanced nested functions',
     fixture: '( calc(( ) ))word',
     expected: [
-        { type: 'function', value: '', before: ' ', after: '', nodes: [
-            { type: 'function', value: 'calc', before: '', after: ' ', nodes: [
-                { type: 'function', value: '', before: ' ', after: '', nodes: [] }
+        { type: 'function', sourceIndex: 0, value: '', before: ' ', after: '', nodes: [
+            { type: 'function', sourceIndex: 2, value: 'calc', before: '', after: ' ', nodes: [
+                { type: 'function', sourceIndex: 7, value: '', before: ' ', after: '', nodes: [] }
             ] }
         ] },
         { type: 'word', sourceIndex: 13, value: 'word' }
@@ -108,7 +108,7 @@ var tests = [{
     message: 'should process divider in function',
     fixture: '( , )',
     expected: [
-        { type: 'function', value: '', before: ' ', after: ' ', nodes: [
+        { type: 'function', sourceIndex: 0, value: '', before: ' ', after: ' ', nodes: [
             { type: 'div', value: ',', before: '', after: '' }
         ] }
     ]
@@ -221,7 +221,7 @@ var tests = [{
     message: 'should correctly proceess color value',
     fixture: 'rgba( 29, 439 , 29 )',
     expected: [
-        { type: 'function', value: 'rgba', before: ' ', after: ' ', nodes: [
+        { type: 'function', sourceIndex: 0, value: 'rgba', before: ' ', after: ' ', nodes: [
             { type: 'word', sourceIndex: 6, value: '29' },
             { type: 'div', value: ',', before: '', after: ' ' },
             { type: 'word', sourceIndex: 10, value: '439' },
@@ -233,7 +233,7 @@ var tests = [{
     message: 'should correctly process url function',
     fixture: 'url( /gfx/img/bg.jpg )',
     expected: [
-        { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
             { type: 'word', sourceIndex: 5, value: '/gfx/img/bg.jpg' }
         ] }
     ]
@@ -241,7 +241,7 @@ var tests = [{
     message: 'should add unclosed: true prop for url function',
     fixture: 'url( /gfx/img/bg.jpg ',
     expected: [
-        { type: 'function', value: 'url', before: ' ', after: '', unclosed: true, nodes: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: '', unclosed: true, nodes: [
             { type: 'word', sourceIndex: 5, value: '/gfx/img/bg.jpg' },
             { type: 'space', sourceIndex: 20, value: ' ' }
         ] }
@@ -250,7 +250,7 @@ var tests = [{
     message: 'should correctly process url function with quoted first argument',
     fixture: 'url( "/gfx/img/bg.jpg" hello )',
     expected: [
-        { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
             { type: 'string', sourceIndex: 5, quote: '"', value: '/gfx/img/bg.jpg' },
             { type: 'space', sourceIndex: 22, value: ' ' },
             { type: 'word', sourceIndex: 23, value: 'hello' }
@@ -260,9 +260,9 @@ var tests = [{
     message: 'should correctly process nested calc functions',
     fixture: 'calc(((768px - 100vw) / 2) - 15px)',
     expected: [
-        {type: 'function', value: 'calc', before: '', after: '', nodes: [
-            { type: 'function', value: '', before: '', after: '', nodes: [
-                { type: 'function', value: '', before: '', after: '', nodes: [
+        {type: 'function', sourceIndex: 0, value: 'calc', before: '', after: '', nodes: [
+            { type: 'function', sourceIndex: 5, value: '', before: '', after: '', nodes: [
+                { type: 'function', sourceIndex: 6, value: '', before: '', after: '', nodes: [
                     { type: 'word', sourceIndex: 7, value: '768px' },
                     { type: 'space', sourceIndex: 12, value: ' ' },
                     { type: 'word', sourceIndex: 13, value: '-' },
@@ -282,7 +282,7 @@ var tests = [{
     message: 'should process colons with params',
     fixture: '(min-width: 700px) and (orientation: \\$landscape)',
     expected: [
-        { type: 'function', value: '', before: '', after: '', nodes: [
+        { type: 'function', sourceIndex: 0, value: '', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 1, value: 'min-width' },
             { type: 'div', value: ':', before: '', after: ' ' },
             { type: 'word', sourceIndex: 12, value: '700px' }
@@ -290,7 +290,7 @@ var tests = [{
         { type: 'space', sourceIndex: 18, value: ' ' },
         { type: 'word', sourceIndex: 19, value: 'and' },
         { type: 'space', sourceIndex: 22, value: ' ' },
-        { type: 'function', value: '', before: '', after: '', nodes: [
+        { type: 'function', sourceIndex: 23, value: '', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 24, value: 'orientation' },
             { type: 'div', value: ':', before: '', after: ' ' },
             { type: 'word', sourceIndex: 37, value: '\\$landscape' }
@@ -300,7 +300,7 @@ var tests = [{
     message: 'should escape parentheses with backslash',
     fixture: 'url( http://website.com/assets\\)_test )',
     expected: [
-        { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
             { type: 'word', sourceIndex: 5, value: 'http://website.com/assets\\)_test' }
         ] }
     ]
@@ -308,18 +308,18 @@ var tests = [{
     message: 'should parse parentheses correctly',
     fixture: 'fn1(fn2(255), fn3(.2)), fn4(fn5(255,.2), fn6)',
     expected: [
-        { type: 'function', value: 'fn1', before: '', after: '', nodes: [
-            { type: 'function', value: 'fn2', before: '', after: '', nodes: [
+        { type: 'function', sourceIndex: 0, value: 'fn1', before: '', after: '', nodes: [
+            { type: 'function', sourceIndex: 4, value: 'fn2', before: '', after: '', nodes: [
                 { type: 'word', sourceIndex: 8, value: '255' }
             ] },
             { type: 'div', value: ',', before: '', after: ' ' },
-            { type: 'function', value: 'fn3', before: '', after: '', nodes: [
+            { type: 'function', sourceIndex: 14, value: 'fn3', before: '', after: '', nodes: [
                 { type: 'word', sourceIndex: 18, value: '.2' }
             ] },
         ] },
         { type: 'div', value: ',', before: '', after: ' ' },
-        { type: 'function', value: 'fn4', before: '', after: '', nodes: [
-            { type: 'function', value: 'fn5', before: '', after: '', nodes: [
+        { type: 'function', sourceIndex: 24, value: 'fn4', before: '', after: '', nodes: [
+            { type: 'function', sourceIndex: 28, value: 'fn5', before: '', after: '', nodes: [
                 { type: 'word', sourceIndex: 32, value: '255' },
                 { type: 'div', value: ',', before: '', after: '' },
                 { type: 'word', sourceIndex: 36, value: '.2' }
@@ -332,7 +332,7 @@ var tests = [{
     message: 'shouldn\'t throw an error on unclosed function',
     fixture: '(0 32 word ',
     expected: [
-        { type: 'function', value: '', before: '', after: '', unclosed: true, nodes: [
+        { type: 'function', sourceIndex: 0, value: '', before: '', after: '', unclosed: true, nodes: [
             { type: 'word', sourceIndex: 1, value: '0' },
             { type: 'space', sourceIndex: 2, value: ' ' },
             { type: 'word', sourceIndex: 3, value: '32' },
@@ -345,9 +345,9 @@ var tests = [{
     message: 'should add unclosed: true prop for every unclosed function',
     fixture: '( ( ( ) ',
     expected: [
-        { type: 'function', value: '', before: ' ', after: '', unclosed: true, nodes: [
-            { type: 'function', value: '', before: ' ', after: '', unclosed: true, nodes: [
-                { type: 'function', value: '', before: ' ', after: '', nodes: [] },
+        { type: 'function', sourceIndex: 0, value: '', before: ' ', after: '', unclosed: true, nodes: [
+            { type: 'function', sourceIndex: 2, value: '', before: ' ', after: '', unclosed: true, nodes: [
+                { type: 'function', sourceIndex: 4, value: '', before: ' ', after: '', nodes: [] },
                 { type: 'space', sourceIndex: 7, value: ' ' }
             ] }
         ] }
@@ -375,11 +375,11 @@ var tests = [{
     message: 'should parse double url and comma',
     fixture: 'url(foo/bar.jpg), url(http://website.com/img.jpg)',
     expected: [
-        { type: 'function', value: 'url', before: '', after: '', nodes: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 4, value: 'foo/bar.jpg' }
         ] },
         { type: 'div', value: ',', before: '', after: ' ' },
-        { type: 'function', value: 'url', before: '', after: '', nodes: [
+        { type: 'function', sourceIndex: 18, value: 'url', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 22, value: 'http://website.com/img.jpg' }
         ] },
     ]
