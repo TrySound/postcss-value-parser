@@ -123,62 +123,62 @@ var tests = [{
     message: 'should process empty quoted strings (")',
     fixture: '""',
     expected: [
-        { type: 'string', value: '', quote: '"' }
+        { type: 'string', sourceIndex: 0, value: '', quote: '"' }
     ]
 }, {
     message: 'should process empty quoted strings (\')',
     fixture: '\'\'',
     expected: [
-        { type: 'string', value: '', quote: '\'' }
+        { type: 'string', sourceIndex: 0, value: '', quote: '\'' }
     ]
 }, {
     message: 'should process escaped quotes (\')',
     fixture: '\'word\\\'word\'',
     expected: [
-        { type: 'string', value: 'word\\\'word', quote: '\'' }
+        { type: 'string', sourceIndex: 0, value: 'word\\\'word', quote: '\'' }
     ]
 }, {
     message: 'should process escaped quotes (\')',
     fixture: '"word\\"word"',
     expected: [
-        { type: 'string', value: 'word\\"word', quote: '"' }
+        { type: 'string', sourceIndex: 0, value: 'word\\"word', quote: '"' }
     ]
 }, {
     message: 'should process single quotes inside double quotes (\')',
     fixture: '"word\'word"',
     expected: [
-        { type: 'string', value: 'word\'word', quote: '"' }
+        { type: 'string', sourceIndex: 0, value: 'word\'word', quote: '"' }
     ]
 }, {
     message: 'should process double quotes inside single quotes (\')',
     fixture: '\'word"word\'',
     expected: [
-        { type: 'string', value: 'word"word', quote: '\'' }
+        { type: 'string', sourceIndex: 0, value: 'word"word', quote: '\'' }
     ]
 }, {
     message: 'should process unclosed quotes',
     fixture: '"word',
     expected: [
-        { type: 'string', value: 'word', quote: '"', unclosed: true }
+        { type: 'string', sourceIndex: 0, value: 'word', quote: '"', unclosed: true }
     ]
 }, {
     message: 'should process unclosed quotes with ended backslash',
     fixture: '"word\\',
     expected: [
-        { type: 'string', value: 'word\\', quote: '"', unclosed: true }
+        { type: 'string', sourceIndex: 0, value: 'word\\', quote: '"', unclosed: true }
     ]
 }, {
     message: 'should process quoted strings',
     fixture: '"string"',
     expected: [
-        { type: 'string', value: 'string', quote: '"' }
+        { type: 'string', sourceIndex: 0, value: 'string', quote: '"' }
     ]
 }, {
     message: 'should process quoted strings and words',
     fixture: 'word1"string"word2',
     expected: [
         { type: 'word', value: 'word1' },
-        { type: 'string', value: 'string', quote: '"' },
+        { type: 'string', sourceIndex: 5, value: 'string', quote: '"' },
         { type: 'word', value: 'word2' }
     ]
 }, {
@@ -186,7 +186,7 @@ var tests = [{
     fixture: ' "string" ',
     expected: [
         { type: 'space', sourceIndex: 0, value: ' ' },
-        { type: 'string', value: 'string', quote: '"' },
+        { type: 'string', sourceIndex: 1, value: 'string', quote: '"' },
         { type: 'space', sourceIndex: 9, value: ' ' }
     ]
 }, {
@@ -209,11 +209,11 @@ var tests = [{
         { type: 'div', value: '/' , before: ' \t ', after: '' },
         { type: 'word', value: '3' },
         { type: 'space', sourceIndex: 21, value: ' ' },
-        { type: 'string', value: 'Open Sans', quote: '\'' },
+        { type: 'string', sourceIndex: 22, value: 'Open Sans', quote: '\'' },
         { type: 'div', value: ',', before: '', after: ' ' },
         { type: 'word', value: 'Arial' },
         { type: 'div', value: ',', before: '', after: ' ' },
-        { type: 'string', value: 'Helvetica Neue', quote: '"' },
+        { type: 'string', sourceIndex: 42, value: 'Helvetica Neue', quote: '"' },
         { type: 'div', value: ',', before: '', after: ' ' },
         { type: 'word', value: 'sans-serif' },
     ]
@@ -251,7 +251,7 @@ var tests = [{
     fixture: 'url( "/gfx/img/bg.jpg" hello )',
     expected: [
         { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'string', quote: '"', value: '/gfx/img/bg.jpg' },
+            { type: 'string', sourceIndex: 5, quote: '"', value: '/gfx/img/bg.jpg' },
             { type: 'space', sourceIndex: 22, value: ' ' },
             { type: 'word', value: 'hello' }
         ] }
