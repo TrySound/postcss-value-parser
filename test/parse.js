@@ -9,27 +9,27 @@ var tests = [{
     message: 'should process escaped parentheses (open)',
     fixture: '\\(',
     expected: [
-        { type: 'word', value: '\\(' }
+        { type: 'word', sourceIndex: 0, value: '\\(' }
     ]
 }, {
     message: 'should process escaped parentheses (close)',
     fixture: '\\)',
     expected: [
-        { type: 'word', value: '\\)' }
+        { type: 'word', sourceIndex: 0, value: '\\)' }
     ]
 }, {
     message: 'should process escaped parentheses (both)',
     fixture: '\\(\\)',
     expected: [
-        { type: 'word', value: '\\(\\)' }
+        { type: 'word', sourceIndex: 0, value: '\\(\\)' }
     ]
 }, {
     message: 'should process escaped parentheses (both)',
     fixture: '\\( \\)',
     expected: [
-        { type: 'word', value: '\\(' },
+        { type: 'word', sourceIndex: 0, value: '\\(' },
         { type: 'space', sourceIndex: 2, value: ' ' },
-        { type: 'word', value: '\\)' }
+        { type: 'word', sourceIndex: 3, value: '\\)' }
     ]
 }, {
     message: 'should process unopened parentheses as word',
@@ -37,7 +37,7 @@ var tests = [{
     expected: [
         { type: 'function', value: '', before: '', after: '', nodes: [] },
         { type: 'space', sourceIndex: 2, value: ' ' },
-        { type: 'word', value: ')wo)rd)' }
+        { type: 'word', sourceIndex: 3, value: ')wo)rd)' }
     ]
 }, {
     message: 'should add before prop',
@@ -50,7 +50,7 @@ var tests = [{
     fixture: '( | )',
     expected: [
         { type: 'function', value: '', before: ' ', after: ' ', nodes: [
-            { type: 'word', value: '|' }
+            { type: 'word', sourceIndex: 2, value: '|' }
         ] }
     ]
 }, {
@@ -78,7 +78,7 @@ var tests = [{
                 { type: 'function', value: '', before: ' ', after: '', nodes: [] }
             ] }
         ] },
-        { type: 'word', value: 'word' }
+        { type: 'word', sourceIndex: 13, value: 'word' }
     ]
 }, {
     message: 'should process divider (/)',
@@ -177,9 +177,9 @@ var tests = [{
     message: 'should process quoted strings and words',
     fixture: 'word1"string"word2',
     expected: [
-        { type: 'word', value: 'word1' },
+        { type: 'word', sourceIndex: 0, value: 'word1' },
         { type: 'string', sourceIndex: 5, value: 'string', quote: '"' },
-        { type: 'word', value: 'word2' }
+        { type: 'word', sourceIndex: 13, value: 'word2' }
     ]
 }, {
     message: 'should process quoted strings and spaces',
@@ -194,39 +194,39 @@ var tests = [{
     fixture: ' \\"word\\\'\\ \\\t ',
     expected: [
         { type: 'space', sourceIndex: 0, value: ' ' },
-        { type: 'word', value: '\\"word\\\'\\ \\\t'},
+        { type: 'word', sourceIndex: 1, value: '\\"word\\\'\\ \\\t'},
         { type: 'space', sourceIndex: 13, value: ' ' }
     ]
 }, {
     message: 'should correctly proceess font value',
     fixture: 'bold italic 12px \t /3 \'Open Sans\', Arial, "Helvetica Neue", sans-serif',
     expected: [
-        { type: 'word', value: 'bold' },
+        { type: 'word', sourceIndex: 0, value: 'bold' },
         { type: 'space', sourceIndex: 4, value: ' ' },
-        { type: 'word', value: 'italic' },
+        { type: 'word', sourceIndex: 5, value: 'italic' },
         { type: 'space', sourceIndex: 11, value: ' ' },
-        { type: 'word', value: '12px' },
+        { type: 'word', sourceIndex: 12, value: '12px' },
         { type: 'div', value: '/' , before: ' \t ', after: '' },
-        { type: 'word', value: '3' },
+        { type: 'word', sourceIndex: 20, value: '3' },
         { type: 'space', sourceIndex: 21, value: ' ' },
         { type: 'string', sourceIndex: 22, value: 'Open Sans', quote: '\'' },
         { type: 'div', value: ',', before: '', after: ' ' },
-        { type: 'word', value: 'Arial' },
+        { type: 'word', sourceIndex: 35, value: 'Arial' },
         { type: 'div', value: ',', before: '', after: ' ' },
         { type: 'string', sourceIndex: 42, value: 'Helvetica Neue', quote: '"' },
         { type: 'div', value: ',', before: '', after: ' ' },
-        { type: 'word', value: 'sans-serif' },
+        { type: 'word', sourceIndex: 60, value: 'sans-serif' },
     ]
 }, {
     message: 'should correctly proceess color value',
     fixture: 'rgba( 29, 439 , 29 )',
     expected: [
         { type: 'function', value: 'rgba', before: ' ', after: ' ', nodes: [
-            { type: 'word',  value: '29' },
-            { type: 'div',   value: ',', before: '', after: ' ' },
-            { type: 'word',  value: '439' },
-            { type: 'div',   value: ',', before: ' ', after: ' ' },
-            { type: 'word',  value: '29' },
+            { type: 'word', sourceIndex: 6, value: '29' },
+            { type: 'div', value: ',', before: '', after: ' ' },
+            { type: 'word', sourceIndex: 10, value: '439' },
+            { type: 'div', value: ',', before: ' ', after: ' ' },
+            { type: 'word', sourceIndex: 16, value: '29' },
         ] }
     ]
 }, {
@@ -234,7 +234,7 @@ var tests = [{
     fixture: 'url( /gfx/img/bg.jpg )',
     expected: [
         { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'word', value: '/gfx/img/bg.jpg' }
+            { type: 'word', sourceIndex: 5, value: '/gfx/img/bg.jpg' }
         ] }
     ]
 }, {
@@ -242,7 +242,7 @@ var tests = [{
     fixture: 'url( /gfx/img/bg.jpg ',
     expected: [
         { type: 'function', value: 'url', before: ' ', after: '', unclosed: true, nodes: [
-            { type: 'word', value: '/gfx/img/bg.jpg' },
+            { type: 'word', sourceIndex: 5, value: '/gfx/img/bg.jpg' },
             { type: 'space', sourceIndex: 20, value: ' ' }
         ] }
     ]
@@ -253,7 +253,7 @@ var tests = [{
         { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
             { type: 'string', sourceIndex: 5, quote: '"', value: '/gfx/img/bg.jpg' },
             { type: 'space', sourceIndex: 22, value: ' ' },
-            { type: 'word', value: 'hello' }
+            { type: 'word', sourceIndex: 23, value: 'hello' }
         ] }
     ]
 }, {
@@ -263,19 +263,19 @@ var tests = [{
         {type: 'function', value: 'calc', before: '', after: '', nodes: [
             { type: 'function', value: '', before: '', after: '', nodes: [
                 { type: 'function', value: '', before: '', after: '', nodes: [
-                    { type: 'word', value: '768px' },
+                    { type: 'word', sourceIndex: 7, value: '768px' },
                     { type: 'space', sourceIndex: 12, value: ' ' },
-                    { type: 'word', value: '-' },
+                    { type: 'word', sourceIndex: 13, value: '-' },
                     { type: 'space', sourceIndex: 14, value: ' ' },
-                    { type: 'word', value: '100vw' }
+                    { type: 'word', sourceIndex: 15, value: '100vw' }
                 ] },
                 { type: 'div', value: '/', before: ' ', after: ' ' },
-                { type: 'word', value: '2' }
+                { type: 'word', sourceIndex: 24, value: '2' }
             ] },
             { type: 'space', sourceIndex: 26, value: ' ' },
-            { type: 'word', value: '-' },
+            { type: 'word', sourceIndex: 27, value: '-' },
             { type: 'space', sourceIndex: 28, value: ' ' },
-            { type: 'word', value: '15px' }
+            { type: 'word', sourceIndex: 29, value: '15px' }
         ] }
     ]
 }, {
@@ -283,17 +283,17 @@ var tests = [{
     fixture: '(min-width: 700px) and (orientation: \\$landscape)',
     expected: [
         { type: 'function', value: '', before: '', after: '', nodes: [
-            { type: 'word', value: 'min-width' },
+            { type: 'word', sourceIndex: 1, value: 'min-width' },
             { type: 'div', value: ':', before: '', after: ' ' },
-            { type: 'word', value: '700px' }
+            { type: 'word', sourceIndex: 12, value: '700px' }
         ] },
         { type: 'space', sourceIndex: 18, value: ' ' },
-        { type: 'word', value: 'and' },
+        { type: 'word', sourceIndex: 19, value: 'and' },
         { type: 'space', sourceIndex: 22, value: ' ' },
         { type: 'function', value: '', before: '', after: '', nodes: [
-            { type: 'word', value: 'orientation' },
+            { type: 'word', sourceIndex: 24, value: 'orientation' },
             { type: 'div', value: ':', before: '', after: ' ' },
-            { type: 'word', value: '\\$landscape' }
+            { type: 'word', sourceIndex: 37, value: '\\$landscape' }
         ] }
     ]
 }, {
@@ -301,7 +301,7 @@ var tests = [{
     fixture: 'url( http://website.com/assets\\)_test )',
     expected: [
         { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'word', value: 'http://website.com/assets\\)_test' }
+            { type: 'word', sourceIndex: 5, value: 'http://website.com/assets\\)_test' }
         ] }
     ]
 }, {
@@ -310,22 +310,22 @@ var tests = [{
     expected: [
         { type: 'function', value: 'fn1', before: '', after: '', nodes: [
             { type: 'function', value: 'fn2', before: '', after: '', nodes: [
-                { type: 'word', value: '255' }
+                { type: 'word', sourceIndex: 8, value: '255' }
             ] },
             { type: 'div', value: ',', before: '', after: ' ' },
             { type: 'function', value: 'fn3', before: '', after: '', nodes: [
-                { type: 'word', value: '.2' }
+                { type: 'word', sourceIndex: 18, value: '.2' }
             ] },
         ] },
         { type: 'div', value: ',', before: '', after: ' ' },
         { type: 'function', value: 'fn4', before: '', after: '', nodes: [
             { type: 'function', value: 'fn5', before: '', after: '', nodes: [
-                { type: 'word', value: '255' },
+                { type: 'word', sourceIndex: 32, value: '255' },
                 { type: 'div', value: ',', before: '', after: '' },
-                { type: 'word', value: '.2' }
+                { type: 'word', sourceIndex: 36, value: '.2' }
             ] },
             { type: 'div', value: ',', before: '', after: ' '},
-            { type: 'word', value: 'fn6' }
+            { type: 'word', sourceIndex: 41, value: 'fn6' }
         ] }
     ]
 }, {
@@ -333,11 +333,11 @@ var tests = [{
     fixture: '(0 32 word ',
     expected: [
         { type: 'function', value: '', before: '', after: '', unclosed: true, nodes: [
-            { type: 'word', value: '0' },
+            { type: 'word', sourceIndex: 1, value: '0' },
             { type: 'space', sourceIndex: 2, value: ' ' },
-            { type: 'word', value: '32' },
+            { type: 'word', sourceIndex: 3, value: '32' },
             { type: 'space', sourceIndex: 5, value: ' ' },
-            { type: 'word', value: 'word' },
+            { type: 'word', sourceIndex: 6, value: 'word' },
             { type: 'space', sourceIndex: 10, value: ' ' }
         ] }
     ]
@@ -356,31 +356,31 @@ var tests = [{
     message: 'shouldn\'t throw an error on unopened function',
     fixture: '0 32 word ) ',
     expected: [
-        { type: 'word', value: '0' },
+        { type: 'word', sourceIndex: 0, value: '0' },
         { type: 'space', sourceIndex: 1, value: ' ' },
-        { type: 'word', value: '32' },
+        { type: 'word', sourceIndex: 2, value: '32' },
         { type: 'space', sourceIndex: 4, value: ' ' },
-        { type: 'word', value: 'word' },
+        { type: 'word', sourceIndex: 5, value: 'word' },
         { type: 'space', sourceIndex: 9, value: ' ' },
-        { type: 'word', value: ')' },
+        { type: 'word', sourceIndex: 10, value: ')' },
         { type: 'space', sourceIndex: 11, value: ' ' }
     ]
 }, {
     message: 'should process escaped spaces as word in fonts',
     fixture: 'Bond\\ 007',
     expected: [
-        { type: 'word', value: 'Bond\\ 007' }
+        { type: 'word', sourceIndex: 0, value: 'Bond\\ 007' }
     ]
 }, {
     message: 'should parse double url and comma',
     fixture: 'url(foo/bar.jpg), url(http://website.com/img.jpg)',
     expected: [
         { type: 'function', value: 'url', before: '', after: '', nodes: [
-            { type: 'word', value: 'foo/bar.jpg' }
+            { type: 'word', sourceIndex: 4, value: 'foo/bar.jpg' }
         ] },
         { type: 'div', value: ',', before: '', after: ' ' },
         { type: 'function', value: 'url', before: '', after: '', nodes: [
-            { type: 'word', value: 'http://website.com/img.jpg' }
+            { type: 'word', sourceIndex: 22, value: 'http://website.com/img.jpg' }
         ] },
     ]
 }];
