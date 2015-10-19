@@ -28,7 +28,7 @@ var tests = [{
     fixture: '\\( \\)',
     expected: [
         { type: 'word', value: '\\(' },
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 2, value: ' ' },
         { type: 'word', value: '\\)' }
     ]
 }, {
@@ -36,7 +36,7 @@ var tests = [{
     fixture: '() )wo)rd)',
     expected: [
         { type: 'function', value: '', before: '', after: '', nodes: [] },
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 2, value: ' ' },
         { type: 'word', value: ')wo)rd)' }
     ]
 }, {
@@ -185,37 +185,37 @@ var tests = [{
     message: 'should process quoted strings and spaces',
     fixture: ' "string" ',
     expected: [
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 0, value: ' ' },
         { type: 'string', value: 'string', quote: '"' },
-        { type: 'space', value: ' ' }
+        { type: 'space', sourceIndex: 9, value: ' ' }
     ]
 }, {
     message: 'should process escaped symbols as words',
     fixture: ' \\"word\\\'\\ \\\t ',
     expected: [
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 0, value: ' ' },
         { type: 'word', value: '\\"word\\\'\\ \\\t'},
-        { type: 'space', value: ' ' }
+        { type: 'space', sourceIndex: 13, value: ' ' }
     ]
 }, {
     message: 'should correctly proceess font value',
     fixture: 'bold italic 12px \t /3 \'Open Sans\', Arial, "Helvetica Neue", sans-serif',
     expected: [
-        { type: 'word',   value: 'bold' },
-        { type: 'space',  value: ' ' },
-        { type: 'word',   value: 'italic' },
-        { type: 'space',  value: ' ' },
-        { type: 'word',   value: '12px' },
-        { type: 'div',    value: '/' , before: ' \t ', after: '' },
-        { type: 'word',   value: '3' },
-        { type: 'space',  value: ' ' },
+        { type: 'word', value: 'bold' },
+        { type: 'space', sourceIndex: 4, value: ' ' },
+        { type: 'word', value: 'italic' },
+        { type: 'space', sourceIndex: 11, value: ' ' },
+        { type: 'word', value: '12px' },
+        { type: 'div', value: '/' , before: ' \t ', after: '' },
+        { type: 'word', value: '3' },
+        { type: 'space', sourceIndex: 21, value: ' ' },
         { type: 'string', value: 'Open Sans', quote: '\'' },
-        { type: 'div',    value: ',', before: '', after: ' ' },
-        { type: 'word',   value: 'Arial' },
-        { type: 'div',    value: ',', before: '', after: ' ' },
+        { type: 'div', value: ',', before: '', after: ' ' },
+        { type: 'word', value: 'Arial' },
+        { type: 'div', value: ',', before: '', after: ' ' },
         { type: 'string', value: 'Helvetica Neue', quote: '"' },
-        { type: 'div',    value: ',', before: '', after: ' ' },
-        { type: 'word',   value: 'sans-serif' },
+        { type: 'div', value: ',', before: '', after: ' ' },
+        { type: 'word', value: 'sans-serif' },
     ]
 }, {
     message: 'should correctly proceess color value',
@@ -243,7 +243,7 @@ var tests = [{
     expected: [
         { type: 'function', value: 'url', before: ' ', after: '', unclosed: true, nodes: [
             { type: 'word', value: '/gfx/img/bg.jpg' },
-            { type: 'space', value: ' ' }
+            { type: 'space', sourceIndex: 20, value: ' ' }
         ] }
     ]
 }, {
@@ -252,7 +252,7 @@ var tests = [{
     expected: [
         { type: 'function', value: 'url', before: ' ', after: ' ', nodes: [
             { type: 'string', quote: '"', value: '/gfx/img/bg.jpg' },
-            { type: 'space', value: ' ' },
+            { type: 'space', sourceIndex: 22, value: ' ' },
             { type: 'word', value: 'hello' }
         ] }
     ]
@@ -264,17 +264,17 @@ var tests = [{
             { type: 'function', value: '', before: '', after: '', nodes: [
                 { type: 'function', value: '', before: '', after: '', nodes: [
                     { type: 'word', value: '768px' },
-                    { type: 'space', value: ' ' },
+                    { type: 'space', sourceIndex: 12, value: ' ' },
                     { type: 'word', value: '-' },
-                    { type: 'space', value: ' ' },
+                    { type: 'space', sourceIndex: 14, value: ' ' },
                     { type: 'word', value: '100vw' }
                 ] },
                 { type: 'div', value: '/', before: ' ', after: ' ' },
                 { type: 'word', value: '2' }
             ] },
-            { type: 'space', value: ' ' },
+            { type: 'space', sourceIndex: 26, value: ' ' },
             { type: 'word', value: '-' },
-            { type: 'space', value: ' ' },
+            { type: 'space', sourceIndex: 28, value: ' ' },
             { type: 'word', value: '15px' }
         ] }
     ]
@@ -287,9 +287,9 @@ var tests = [{
             { type: 'div', value: ':', before: '', after: ' ' },
             { type: 'word', value: '700px' }
         ] },
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 18, value: ' ' },
         { type: 'word', value: 'and' },
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 22, value: ' ' },
         { type: 'function', value: '', before: '', after: '', nodes: [
             { type: 'word', value: 'orientation' },
             { type: 'div', value: ':', before: '', after: ' ' },
@@ -334,11 +334,11 @@ var tests = [{
     expected: [
         { type: 'function', value: '', before: '', after: '', unclosed: true, nodes: [
             { type: 'word', value: '0' },
-            { type: 'space', value: ' ' },
+            { type: 'space', sourceIndex: 2, value: ' ' },
             { type: 'word', value: '32' },
-            { type: 'space', value: ' ' },
+            { type: 'space', sourceIndex: 5, value: ' ' },
             { type: 'word', value: 'word' },
-            { type: 'space', value: ' ' }
+            { type: 'space', sourceIndex: 10, value: ' ' }
         ] }
     ]
 }, {
@@ -348,7 +348,7 @@ var tests = [{
         { type: 'function', value: '', before: ' ', after: '', unclosed: true, nodes: [
             { type: 'function', value: '', before: ' ', after: '', unclosed: true, nodes: [
                 { type: 'function', value: '', before: ' ', after: '', nodes: [] },
-                { type: 'space', value: ' ' }
+                { type: 'space', sourceIndex: 7, value: ' ' }
             ] }
         ] }
     ]
@@ -357,13 +357,13 @@ var tests = [{
     fixture: '0 32 word ) ',
     expected: [
         { type: 'word', value: '0' },
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 1, value: ' ' },
         { type: 'word', value: '32' },
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 4, value: ' ' },
         { type: 'word', value: 'word' },
-        { type: 'space', value: ' ' },
+        { type: 'space', sourceIndex: 9, value: ' ' },
         { type: 'word', value: ')' },
-        { type: 'space', value: ' ' }
+        { type: 'space', sourceIndex: 11, value: ' ' }
     ]
 }, {
     message: 'should process escaped spaces as word in fonts',

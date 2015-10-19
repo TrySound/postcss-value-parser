@@ -66,7 +66,7 @@ test('ValueParser', function (t) {
 
         t.deepEqual(result, [
             { type: 'function', value: 'fn', before: ' ', after: '', nodes: [] },
-            { type: 'space', value: ' '},
+            { type: 'space', sourceIndex: 5, value: ' '},
             { type: 'word', value: 'fn2', before: ' ', after: '', nodes: [
                 { type: 'function', value: 'fn3', before: '', after: '', nodes: [] }
             ] },
