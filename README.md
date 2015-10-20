@@ -115,7 +115,7 @@ Returning `false` in the callback will prevent traversal of deeper, nested nodes
 
 Returns `this` instance.
 
-- `nodes`: `value-parser` node or nodes
+- `nodes`: array - `value-parser` nodes
 - `cb(node, index, nodes)`: function - Function to execute for each node
 - `bubble`: boolean - Walk from the deepest nodes upwards
 
