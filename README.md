@@ -109,13 +109,15 @@ Stringifies node and array of nodes.
 
 ### valueParser.walk(nodes, cb[, bubble])
 
-Walks each node and recursively each nodes of functions.
-If bubble is `false` and callback returns `false` on function node then deeper walking will be prevented.
+Walks each provided node, recursively for each node in a function.
+
+Returning `false` in the callback will prevent traversal of deeper, nested nodes(inside a function). You can use this to walk over only the immediate children. *note: This only applies if `bubble` is `false`(default).*
+
 Returns `this` instance.
 
-- `nodes` - value-parser node or nodes
-- `cb(node, index, nodes)`
-- `bubble` walk since the deepest functions nodes
+- `nodes`: `value-parser` node or nodes
+- `cb(node, index, nodes)`: function - Function to execute for each node
+- `bubble`: boolean - Walk from the deepest nodes upwards
 
 ### var p = valueParser(value)
 
