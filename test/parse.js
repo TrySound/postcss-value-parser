@@ -383,6 +383,12 @@ var tests = [{
             { type: 'word', sourceIndex: 22, value: 'http://website.com/img.jpg' }
         ] },
     ]
+}, {
+    message: 'should parse empty url',
+    fixture: 'url()',
+    expected: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: '', after: '', nodes: [] }
+    ]
 }];
 
 test('Parse', function (t) {
