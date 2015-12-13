@@ -411,7 +411,27 @@ var tests = [{
             { type: 'string', sourceIndex: 5, value: '/demo/bg.png', quote:'"'},
             { type: 'space', sourceIndex: 19, value: ' ' },
             { type: 'comment', sourceIndex: 20, value: 'comment'}
-        ] }        
+        ] }
+    ]
+}, {
+    message: 'should parse comments at the start of url function',
+    fixture: 'url( /*comment*/ /demo/bg.png )',
+    expected: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
+            { type: 'comment', sourceIndex: 5, value: 'comment'},
+            { type: 'div', sourceIndex: 16, value: '/', before: ' ', after: '' },
+            { type: 'word', sourceIndex: 18, value: 'demo' },
+            { type: 'div', sourceIndex: 22, value: '/', before: '', after: '' },
+            { type: 'word', sourceIndex: 23, value: 'bg.png' }
+        ] }
+    ]
+}, {
+    message: 'should not parse comments in the end of url function',
+    fixture: 'url( /demo/bg.png /*comment*/ )',
+    expected: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
+            { type: 'word', sourceIndex: 5, value: '/demo/bg.png /*comment*/'},
+        ] }
     ]
 }, {
     message: 'should parse unclosed comments',
@@ -422,7 +442,7 @@ var tests = [{
         { type: 'word', sourceIndex: 12, value: '1px' },
         { type: 'space', sourceIndex: 15, value: ' ' },
         { type: 'comment', sourceIndex: 16, value: ' unclosed ', unclosed:true}
-        
+
     ]
 }];
 
