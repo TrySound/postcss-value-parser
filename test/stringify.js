@@ -12,6 +12,10 @@ var tests = [
         fixture: ' rgba( 12,  54, 65) '
     },
     {
+        message: 'Should not close unclosed functions',
+        fixture: ' rgba( 12,  54, 65 '
+    },
+    {
         message: 'Should correctly process advanced gradients',
         fixture: 'background-image:linear-gradient(45deg,transparent 25%,hsla(0,0%,100%,.2) 25%,hsla(0,0%,100%,.2) 75%,transparent 75%,transparent 25%,hsla(0,0%,100%,.2) 75%,transparent 75%,transparent),linear-gradient(45deg,transparent 25%,hsla(0,0%,100%,.2))'
     }
