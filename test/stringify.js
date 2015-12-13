@@ -18,6 +18,14 @@ var tests = [
     {
         message: 'Should correctly process advanced gradients',
         fixture: 'background-image:linear-gradient(45deg,transparent 25%,hsla(0,0%,100%,.2) 25%,hsla(0,0%,100%,.2) 75%,transparent 75%,transparent 25%,hsla(0,0%,100%,.2) 75%,transparent 75%,transparent),linear-gradient(45deg,transparent 25%,hsla(0,0%,100%,.2))'
+    },
+    {
+        message: 'Should correctly add comments',
+        fixture: '/*comment*/ 1px /* unclosed '
+    },
+    {
+        message: 'Should correctly process comments inside functions',
+        fixture: '/*before*/ rgb( /*red component*/ 12,  54 /*green component*/, /* blue */ 65)/* after */ '
     }
 ];
 
