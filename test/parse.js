@@ -389,6 +389,41 @@ var tests = [{
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: '', after: '', nodes: [] }
     ]
+}, {
+    message: 'should parse comments',
+    fixture: '/*before*/ 1px /*between*/ 1px /*after*/',
+    expected: [
+        { type: 'comment', sourceIndex: 0, value: 'before'},
+        { type: 'space', sourceIndex: 10, value: ' ' },
+        { type: 'word', sourceIndex: 11, value: '1px' },
+        { type: 'space', sourceIndex: 14, value: ' ' },
+        { type: 'comment', sourceIndex: 15, value: 'between'},
+        { type: 'space', sourceIndex: 26, value: ' ' },
+        { type: 'word', sourceIndex: 27, value: '1px' },
+        { type: 'space', sourceIndex: 30, value: ' ' },
+        { type: 'comment', sourceIndex: 31, value: 'after'},
+    ]
+}, {
+    message: 'should parse comments inside functions',
+    fixture: 'url( "/demo/bg.png" /*comment*/ )',
+    expected: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
+            { type: 'string', sourceIndex: 5, value: '/demo/bg.png', quote:'"'},
+            { type: 'space', sourceIndex: 19, value: ' ' },
+            { type: 'comment', sourceIndex: 20, value: 'comment'}
+        ] }        
+    ]
+}, {
+    message: 'should parse unclosed comments',
+    fixture: '/*comment*/ 1px /* unclosed ',
+    expected: [
+        { type: 'comment', sourceIndex: 0, value: 'comment'},
+        { type: 'space', sourceIndex: 11, value: ' ' },
+        { type: 'word', sourceIndex: 12, value: '1px' },
+        { type: 'space', sourceIndex: 15, value: ' ' },
+        { type: 'comment', sourceIndex: 16, value: ' unclosed ', unclosed:true}
+        
+    ]
 }];
 
 test('Parse', function (t) {

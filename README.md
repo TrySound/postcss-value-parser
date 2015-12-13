@@ -74,7 +74,7 @@ parsed.toString(); // #E92D42
 
 Each node is an object with these common properties:
 
-- **type**: The type of node (`word`, `string`, `div`, `space`, or `function`).
+- **type**: The type of node (`word`, `string`, `div`, `space`, `comment`, or `function`).
   Each type is documented below.
 - **value**: Each node has a `value` property; but what exactly `value` means
   is specific to the node type. Details are documented for each type below.
@@ -122,6 +122,16 @@ Node-specific properties:
 
 - **value**: The whitespace itself.
 
+### comment
+
+ A CSS comment starts with `/*` and ends with `*/`
+ 
+ Node-specific properties:
+ 
+  - **value**: The comment value without `/*` and `*/`
+  - **unclosed**: True when the comment has no end.
+    e.g. `/* comment without an end  `.
+    
 ### function
 
 A CSS function, e.g. `rgb(0,0,0)` or `url(foo.bar)`.
