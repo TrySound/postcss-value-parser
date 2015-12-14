@@ -99,6 +99,7 @@ Node-specific properties:
 
 - **value**: The text content of the string.
 - **quote**: The quotation mark surrounding the string, either `"` or `'`.
+- **unclosed**: True when the string has no end. e.g. `"unclosed string  `.
 
 ### div
 
@@ -124,14 +125,13 @@ Node-specific properties:
 
 ### comment
 
- A CSS comment starts with `/*` and ends with `*/`
- 
- Node-specific properties:
- 
-  - **value**: The comment value without `/*` and `*/`
-  - **unclosed**: True when the comment has no end.
-    e.g. `/* comment without an end  `.
-    
+A CSS comment starts with `/*` and ends with `*/`
+
+Node-specific properties:
+
+- **value**: The comment value without `/*` and `*/`
+- **unclosed**: True when the comment has no end. e.g. `/* comment without an end  `.
+
 ### function
 
 A CSS function, e.g. `rgb(0,0,0)` or `url(foo.bar)`.
@@ -146,6 +146,7 @@ Additional properties:
 - **after**: Whitespace before the closing parenthesis and after the last argument,
   e.g. `  ` in `rgb(0,0,0  )`.
 - **nodes**: More nodes representing the arguments to the function.
+- **unclosed**: True when the parentheses has no end. e.g. `( function-without-end  `.
 
 Media features surrounded by parentheses are considered functions with an
 empty value. For example, `(min-width: 700px)` parses to these nodes:
