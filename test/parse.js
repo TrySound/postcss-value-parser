@@ -257,6 +257,16 @@ var tests = [{
         ] }
     ]
 }, {
+    message: 'should correctly process url function with un-quoted first argument',
+    fixture: 'url( /gfx/img/bg.jpg hello )',
+    expected: [
+        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
+            { type: 'word', sourceIndex: 5, value: '/gfx/img/bg.jpg' },
+            { type: 'space', sourceIndex: 20, value: ' ' },
+            { type: 'word', sourceIndex: 21, value: 'hello' }
+        ] }
+    ]
+}, {
     message: 'should correctly process nested calc functions',
     fixture: 'calc(((768px - 100vw) / 2) - 15px)',
     expected: [
@@ -405,28 +415,39 @@ var tests = [{
     ]
 }, {
     message: 'should parse comments inside functions',
-    fixture: 'url( "/demo/bg.png" /*comment*/ )',
+    fixture: 'rgba( 0, 0, 0/*,.5*/ )',
     expected: [
-        { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'string', sourceIndex: 5, value: '/demo/bg.png', quote:'"'},
-            { type: 'space', sourceIndex: 19, value: ' ' },
-            { type: 'comment', sourceIndex: 20, value: 'comment'}
+        { type: 'function', sourceIndex: 0, value: 'rgba', before: ' ', after: ' ', nodes: [
+            { type: 'word', sourceIndex: 6, value: '0' },
+            { type: 'div', sourceIndex: 7, value: ',', before:'', after: ' ' },
+            { type: 'word', sourceIndex: 9, value: '0' },
+            { type: 'div', sourceIndex: 10, value: ',', before:'', after: ' ' },
+            { type: 'word', sourceIndex: 12, value: '0' },
+            { type: 'comment', sourceIndex: 13, value: ',.5'}
         ] }
     ]
 }, {
-    message: 'should parse comments at the start of url function',
-    fixture: 'url( /*comment*/ /demo/bg.png )',
+    message: 'should parse comments inside url functions with qouted first argument',
+    fixture: 'url( /*before*/ "/demo/bg.png" /*after*/ )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'word', sourceIndex: 5, value: '/*comment*/ /demo/bg.png'},
+            { type: 'comment', sourceIndex: 5, value: 'before'},
+            { type: 'space', sourceIndex: 15, value: ' ' },
+            { type: 'string', sourceIndex: 16, value: '/demo/bg.png', quote:'"'},
+            { type: 'space', sourceIndex: 30, value: ' ' },
+            { type: 'comment', sourceIndex: 31, value: 'after'}
         ] }
     ]
 }, {
-    message: 'should not parse comments in the end of url function',
-    fixture: 'url( /demo/bg.png /*comment*/ )',
+    message: 'should parse comments inside url functions with un-qouted first argument',
+    fixture: 'url( /*before*/ /demo/bg.png /*after*/ )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'word', sourceIndex: 5, value: '/demo/bg.png /*comment*/'},
+            { type: 'comment', sourceIndex: 5, value: 'before'},
+            { type: 'space', sourceIndex: 15, value: ' ' },
+            { type: 'word', sourceIndex: 16, value: '/demo/bg.png'},
+            { type: 'space', sourceIndex: 28, value: ' ' },
+            { type: 'comment', sourceIndex: 29, value: 'after'}
         ] }
     ]
 }, {
