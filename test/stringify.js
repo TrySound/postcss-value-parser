@@ -8,6 +8,10 @@ var tests = [
         fixture: 'bold italic 12px/3 \'Open Sans\', Arial, "Helvetica Neue", sans-serif'
     },
     {
+        message: 'Should not close unclosed strings',
+        fixture: '" 12,  54, 65 '
+    },
+    {
         message: 'Should correctly add brackets',
         fixture: ' rgba( 12,  54, 65) '
     },
