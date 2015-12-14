@@ -405,6 +405,21 @@ var tests = [{
     ]
 }, {
     message: 'should parse comments inside functions',
+    fixture: 'rgba( 0, 55/55, 0/*,.5*/ )',
+    expected: [
+        { type: 'function', sourceIndex: 0, value: 'rgba', before: ' ', after: ' ', nodes: [
+            { type: 'word', sourceIndex: 6, value: '0' },
+            { type: 'div', sourceIndex: 7, value: ',', before:'', after: ' ' },
+            { type: 'word', sourceIndex: 9, value: '55' },
+            { type: 'div', sourceIndex: 11, value: '/', before:'', after: '' },
+            { type: 'word', sourceIndex: 12, value: '55' },
+            { type: 'div', sourceIndex: 14, value: ',', before:'', after: ' ' },
+            { type: 'word', sourceIndex: 16, value: '0' },
+            { type: 'comment', sourceIndex: 17, value: ',.5'}
+        ] }
+    ]
+}, {
+    message: 'should parse comments at the end of url functions with quoted first argument',
     fixture: 'url( "/demo/bg.png" /*comment*/ )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
@@ -414,7 +429,7 @@ var tests = [{
         ] }
     ]
 }, {
-    message: 'should parse comments at the start of url function',
+    message: 'should not parse comments at the start of url function with unquoted first argument',
     fixture: 'url( /*comment*/ /demo/bg.png )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
@@ -422,7 +437,7 @@ var tests = [{
         ] }
     ]
 }, {
-    message: 'should not parse comments in the end of url function',
+    message: 'should not parse comments at the end of url function with unquoted first argument',
     fixture: 'url( /demo/bg.png /*comment*/ )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
