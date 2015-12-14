@@ -418,11 +418,7 @@ var tests = [{
     fixture: 'url( /*comment*/ /demo/bg.png )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'comment', sourceIndex: 5, value: 'comment'},
-            { type: 'div', sourceIndex: 16, value: '/', before: ' ', after: '' },
-            { type: 'word', sourceIndex: 18, value: 'demo' },
-            { type: 'div', sourceIndex: 22, value: '/', before: '', after: '' },
-            { type: 'word', sourceIndex: 23, value: 'bg.png' }
+            { type: 'word', sourceIndex: 5, value: '/*comment*/ /demo/bg.png'},
         ] }
     ]
 }, {
