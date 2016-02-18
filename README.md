@@ -207,9 +207,11 @@ If the `quantity` argument cannot be parsed as a number, returns `false`.
 the unit. Instead, you should pass it single quantities only. Parse `1px solid black`, then pass it
 the stringified `1px` node (a `word` node) to parse the number and unit.
 
-### valueParser.stringify(nodes)
+### valueParser.stringify(nodes[, custom])
 
 Stringifies a node or array of nodes.
+
+The `custom` function is called for each `node`; return a string to override the default behaviour.
 
 ### valueParser.walk(nodes, callback[, bubble])
 

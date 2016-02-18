@@ -34,14 +34,34 @@ var tests = [
 ];
 
 test('Stringify', function (t) {
-    t.plan(tests.length + 1);
+    t.plan(tests.length + 3);
 
     tests.forEach(function (opts) {
         t.equal(stringify(parse(opts.fixture)), opts.fixture, opts.message);
     });
 
     var tokens = parse(' rgba(12,  54, 65 ) ');
-    tokens[1].type = 'word';
 
+    t.equal(stringify(tokens, function (node) {
+        if (node.type === 'function') {
+            return node.value + '[' + [
+                node.nodes[0].value,
+                node.nodes[2].value,
+                node.nodes[4].value
+            ].join(',') + ']';
+        }
+    }), ' rgba[12,54,65] ');
+
+    t.equal(stringify(tokens[1], function (node) {
+        if (node.type === 'function') {
+            return node.value + '[' + [
+                node.nodes[0].value,
+                node.nodes[2].value,
+                node.nodes[4].value
+            ].join(',') + ']';
+        }
+    }), 'rgba[12,54,65]');
+
+    tokens[1].type = 'word';
     t.equal(stringify(tokens), ' rgba ', 'Shouldn\'t process nodes of work type');
 });

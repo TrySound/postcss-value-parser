@@ -22,7 +22,8 @@
       "max-len": 0,
       "no-bitwise": 0,
       "complexity": 0,
-      "no-use-before-define": 0
+      "no-use-before-define": 0,
+      "consistent-return": 0
     }
   },
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
