@@ -30,7 +30,7 @@ var tests = [{
 test('Unit', function (t) {
     t.plan(tests.length);
 
-    tests.forEach(function (test) {
-        t.deepEqual(unit(test.fixture), test.expected);
+    tests.forEach(function (item) {
+        t.deepEqual(unit(item.fixture), item.expected);
     });
 });

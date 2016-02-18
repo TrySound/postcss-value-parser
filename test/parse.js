@@ -194,7 +194,7 @@ var tests = [{
     fixture: ' \\"word\\\'\\ \\\t ',
     expected: [
         { type: 'space', sourceIndex: 0, value: ' ' },
-        { type: 'word', sourceIndex: 1, value: '\\"word\\\'\\ \\\t'},
+        { type: 'word', sourceIndex: 1, value: '\\"word\\\'\\ \\\t' },
         { type: 'space', sourceIndex: 13, value: ' ' }
     ]
 }, {
@@ -206,7 +206,7 @@ var tests = [{
         { type: 'word', sourceIndex: 5, value: 'italic' },
         { type: 'space', sourceIndex: 11, value: ' ' },
         { type: 'word', sourceIndex: 12, value: '12px' },
-        { type: 'div', sourceIndex: 16, value: '/' , before: ' \t ', after: '' },
+        { type: 'div', sourceIndex: 16, value: '/', before: ' \t ', after: '' },
         { type: 'word', sourceIndex: 20, value: '3' },
         { type: 'space', sourceIndex: 21, value: ' ' },
         { type: 'string', sourceIndex: 22, value: 'Open Sans', quote: '\'' },
@@ -215,7 +215,7 @@ var tests = [{
         { type: 'div', sourceIndex: 40, value: ',', before: '', after: ' ' },
         { type: 'string', sourceIndex: 42, value: 'Helvetica Neue', quote: '"' },
         { type: 'div', sourceIndex: 58, value: ',', before: '', after: ' ' },
-        { type: 'word', sourceIndex: 60, value: 'sans-serif' },
+        { type: 'word', sourceIndex: 60, value: 'sans-serif' }
     ]
 }, {
     message: 'should correctly proceess color value',
@@ -226,7 +226,7 @@ var tests = [{
             { type: 'div', sourceIndex: 8, value: ',', before: '', after: ' ' },
             { type: 'word', sourceIndex: 10, value: '439' },
             { type: 'div', sourceIndex: 13, value: ',', before: ' ', after: ' ' },
-            { type: 'word', sourceIndex: 16, value: '29' },
+            { type: 'word', sourceIndex: 16, value: '29' }
         ] }
     ]
 }, {
@@ -260,7 +260,7 @@ var tests = [{
     message: 'should correctly process nested calc functions',
     fixture: 'calc(((768px - 100vw) / 2) - 15px)',
     expected: [
-        {type: 'function', sourceIndex: 0, value: 'calc', before: '', after: '', nodes: [
+        { type: 'function', sourceIndex: 0, value: 'calc', before: '', after: '', nodes: [
             { type: 'function', sourceIndex: 5, value: '', before: '', after: '', nodes: [
                 { type: 'function', sourceIndex: 6, value: '', before: '', after: '', nodes: [
                     { type: 'word', sourceIndex: 7, value: '768px' },
@@ -315,7 +315,7 @@ var tests = [{
             { type: 'div', sourceIndex: 12, value: ',', before: '', after: ' ' },
             { type: 'function', sourceIndex: 14, value: 'fn3', before: '', after: '', nodes: [
                 { type: 'word', sourceIndex: 18, value: '.2' }
-            ] },
+            ] }
         ] },
         { type: 'div', sourceIndex: 22, value: ',', before: '', after: ' ' },
         { type: 'function', sourceIndex: 24, value: 'fn4', before: '', after: '', nodes: [
@@ -324,7 +324,7 @@ var tests = [{
                 { type: 'div', sourceIndex: 35, value: ',', before: '', after: '' },
                 { type: 'word', sourceIndex: 36, value: '.2' }
             ] },
-            { type: 'div', sourceIndex: 39, value: ',', before: '', after: ' '},
+            { type: 'div', sourceIndex: 39, value: ',', before: '', after: ' ' },
             { type: 'word', sourceIndex: 41, value: 'fn6' }
         ] }
     ]
@@ -381,7 +381,7 @@ var tests = [{
         { type: 'div', sourceIndex: 16, value: ',', before: '', after: ' ' },
         { type: 'function', sourceIndex: 18, value: 'url', before: '', after: '', nodes: [
             { type: 'word', sourceIndex: 22, value: 'http://website.com/img.jpg' }
-        ] },
+        ] }
     ]
 }, {
     message: 'should parse empty url',
@@ -393,15 +393,15 @@ var tests = [{
     message: 'should parse comments',
     fixture: '/*before*/ 1px /*between*/ 1px /*after*/',
     expected: [
-        { type: 'comment', sourceIndex: 0, value: 'before'},
+        { type: 'comment', sourceIndex: 0, value: 'before' },
         { type: 'space', sourceIndex: 10, value: ' ' },
         { type: 'word', sourceIndex: 11, value: '1px' },
         { type: 'space', sourceIndex: 14, value: ' ' },
-        { type: 'comment', sourceIndex: 15, value: 'between'},
+        { type: 'comment', sourceIndex: 15, value: 'between' },
         { type: 'space', sourceIndex: 26, value: ' ' },
         { type: 'word', sourceIndex: 27, value: '1px' },
         { type: 'space', sourceIndex: 30, value: ' ' },
-        { type: 'comment', sourceIndex: 31, value: 'after'},
+        { type: 'comment', sourceIndex: 31, value: 'after' }
     ]
 }, {
     message: 'should parse comments inside functions',
@@ -415,7 +415,7 @@ var tests = [{
             { type: 'word', sourceIndex: 12, value: '55' },
             { type: 'div', sourceIndex: 14, value: ',', before:'', after: ' ' },
             { type: 'word', sourceIndex: 16, value: '0' },
-            { type: 'comment', sourceIndex: 17, value: ',.5'}
+            { type: 'comment', sourceIndex: 17, value: ',.5' }
         ] }
     ]
 }, {
@@ -423,9 +423,9 @@ var tests = [{
     fixture: 'url( "/demo/bg.png" /*comment*/ )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'string', sourceIndex: 5, value: '/demo/bg.png', quote:'"'},
+            { type: 'string', sourceIndex: 5, value: '/demo/bg.png', quote:'"' },
             { type: 'space', sourceIndex: 19, value: ' ' },
-            { type: 'comment', sourceIndex: 20, value: 'comment'}
+            { type: 'comment', sourceIndex: 20, value: 'comment' }
         ] }
     ]
 }, {
@@ -433,7 +433,7 @@ var tests = [{
     fixture: 'url( /*comment*/ /demo/bg.png )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'word', sourceIndex: 5, value: '/*comment*/ /demo/bg.png'},
+            { type: 'word', sourceIndex: 5, value: '/*comment*/ /demo/bg.png' }
         ] }
     ]
 }, {
@@ -441,18 +441,18 @@ var tests = [{
     fixture: 'url( /demo/bg.png /*comment*/ )',
     expected: [
         { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
-            { type: 'word', sourceIndex: 5, value: '/demo/bg.png /*comment*/'},
+            { type: 'word', sourceIndex: 5, value: '/demo/bg.png /*comment*/' }
         ] }
     ]
 }, {
     message: 'should parse unclosed comments',
     fixture: '/*comment*/ 1px /* unclosed ',
     expected: [
-        { type: 'comment', sourceIndex: 0, value: 'comment'},
+        { type: 'comment', sourceIndex: 0, value: 'comment' },
         { type: 'space', sourceIndex: 11, value: ' ' },
         { type: 'word', sourceIndex: 12, value: '1px' },
         { type: 'space', sourceIndex: 15, value: ' ' },
-        { type: 'comment', sourceIndex: 16, value: ' unclosed ', unclosed:true}
+        { type: 'comment', sourceIndex: 16, value: ' unclosed ', unclosed:true }
 
     ]
 }];
