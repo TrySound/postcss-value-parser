@@ -25,6 +25,21 @@ var tests = [{
 }, {
     fixture: '.rem',
     expected: false
+}, {
+    fixture: '1e4px',
+    expected: { number: '1e4', unit: 'px' }
+}, {
+    fixture: '1em',
+    expected: { number: '1', unit: 'em' }
+}, {
+    fixture: '1e10',
+    expected: { number: '1e10', unit: '' }
+}, {
+    fixture: '',
+    expected: false
+}, {
+    fixture: 'e',
+    expected: false
 }];
 
 test('Unit', function (t) {
