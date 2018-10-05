@@ -7,23 +7,37 @@
     "lib"
   ],
   "devDependencies": {
-    "eslint": "^2.1.0",
-    "eslint-config-postcss": "^2.0.0",
-    "tap-spec": "^4.1.0",
-    "tape": "^4.2.0"
+    "tap-spec": "^5.0.0",
+    "tape": "^4.2.0",
+    "eslint": "^5.6.1",
+    "husky": "^1.0.0",
+    "lint-staged": "^7.3.0",
+    "prettier": "^1.4.4"
   },
   "scripts": {
-    "test": "tape test/*.js | tap-spec",
-    "posttest": "eslint ."
+    "lint:prettier": "prettier '**/*.js' --list-different",
+    "lint:js": "eslint . --cache",
+    "lint": "npm run lint:js && npm run lint:prettier",
+    "pretest": "npm run lint",
+    "test": "tape test/*.js | tap-spec"
   },
   "eslintConfig": {
-    "extends": "postcss/es5",
-    "rules": {
-      "max-len": 0,
-      "no-bitwise": 0,
-      "complexity": 0,
-      "no-use-before-define": 0,
-      "consistent-return": 0
+    "env": {
+      "es6": true,
+      "node": true
+    },
+    "extends": "eslint:recommended"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint",
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
   },
   "author": "Bogdan Chadkin <trysound@yandex.ru>",
