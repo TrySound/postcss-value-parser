@@ -17,8 +17,8 @@
   "scripts": {
     "lint:prettier": "prettier '**/*.js' --list-different",
     "lint:js": "eslint . --cache",
-    "lint": "npm run lint:js && npm run lint:prettier",
-    "pretest": "npm run lint",
+    "lint": "yarn lint:js && yarn lint:prettier",
+    "pretest": "yarn lint",
     "test": "tape test/*.js | tap-spec"
   },
   "eslintConfig": {
