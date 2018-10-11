@@ -929,6 +929,17 @@ var tests = [
         unclosed: true
       }
     ]
+  },
+  {
+    message: "should respect escape character",
+    fixture: "Hawaii \\35 -0",
+    expected: [
+      { type: "word", sourceIndex: 0, value: "Hawaii" },
+      { type: "space", sourceIndex: 6, value: " " },
+      { type: "word", sourceIndex: 7, value: "\\35" },
+      { type: "space", sourceIndex: 10, value: " " },
+      { type: "word", sourceIndex: 11, value: "-0" }
+    ]
   }
 ];
 
