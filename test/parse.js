@@ -903,6 +903,104 @@ var tests = [
     ]
   },
   {
+    message: "should parse empty url with space",
+    fixture: "url( )",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "url",
+        before: " ",
+        after: "",
+        nodes: []
+      }
+    ]
+  },
+  {
+    message: "should parse empty url with multiple spaces",
+    fixture: "url(   )",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "url",
+        before: "   ",
+        after: "",
+        nodes: []
+      }
+    ]
+  },
+  {
+    message: "should parse empty url with newline (LF)",
+    fixture: "url(\n)",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "url",
+        before: "\n",
+        after: "",
+        nodes: []
+      }
+    ]
+  },
+  {
+    message: "should parse empty url with newline (CRLF)",
+    fixture: "url(\r\n)",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "url",
+        before: "\r\n",
+        after: "",
+        nodes: []
+      }
+    ]
+  },
+  {
+    message: "should parse empty url with multiple newlines (LF)",
+    fixture: "url(\n\n\n)",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "url",
+        before: "\n\n\n",
+        after: "",
+        nodes: []
+      }
+    ]
+  },
+  {
+    message: "should parse empty url with multiple newlines (CRLF)",
+    fixture: "url(\r\n\r\n\r\n)",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "url",
+        before: "\r\n\r\n\r\n",
+        after: "",
+        nodes: []
+      }
+    ]
+  },
+  {
+    message: "should parse empty url with whitespace characters",
+    fixture: "url(  \n \t  \r\n  )",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "url",
+        before: "  \n \t  \r\n  ",
+        after: "",
+        nodes: []
+      }
+    ]
+  },
+  {
     message: "should parse comments",
     fixture: "/*before*/ 1px /*between*/ 1px /*after*/",
     expected: [

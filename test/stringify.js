@@ -27,12 +27,48 @@ var tests = [
   },
   {
     message: "Should correctly add comments",
-    fixture: "/*comment*/ 1px /* unclosed "
+    fixture: "/!*comment*!/ 1px /!* unclosed "
   },
   {
     message: "Should correctly process comments inside functions",
     fixture:
-      "/*before*/ rgb( /*red component*/ 12,  54 /*green component*/, /* blue */ 65)/* after */ "
+      "/!*before*!/ rgb( /!*red component*!/ 12,  54 /!*green component*!/, /!* blue *!/ 65)/!* after *!/ "
+  },
+  {
+    message: "Should correctly process empty url",
+    fixture: "url()"
+  },
+  {
+    message: "Should correctly process empty url with space",
+    fixture: "url( )"
+  },
+  {
+    message: "Should correctly process empty url with spaces",
+    fixture: "url(   )"
+  },
+  {
+    message: "Should correctly process empty url with tab",
+    fixture: "url(\t)"
+  },
+  {
+    message: "Should correctly process empty url with newline (LF)",
+    fixture: "url(\n)"
+  },
+  {
+    message: "Should correctly process empty url with newline (LF)",
+    fixture: "url(\n\n\n)"
+  },
+  {
+    message: "Should correctly process empty url with multiple newlines (CRLF)",
+    fixture: "url(\r\n)"
+  },
+  {
+    message: "Should correctly process empty url with multiple newlines (CRLF)",
+    fixture: "url(\r\n\r\n\r\n)"
+  },
+  {
+    message: "Should correctly process empty url whitespace characters",
+    fixture: "url(  \n \t  \n  )"
   }
 ];
 
