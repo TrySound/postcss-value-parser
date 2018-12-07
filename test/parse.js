@@ -453,6 +453,116 @@ var tests = [
     ]
   },
   {
+    message: "should correctly parse spaces",
+    fixture: "calc(1 + 2)",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "calc",
+        before: "",
+        after: "",
+        nodes: [
+          {
+            type: "word",
+            sourceIndex: 5,
+            value: "1"
+          },
+          {
+            type: "space",
+            sourceIndex: 6,
+            value: " "
+          },
+          {
+            type: "word",
+            sourceIndex: 7,
+            value: "+"
+          },
+          {
+            type: "space",
+            sourceIndex: 8,
+            value: " "
+          },
+          {
+            type: "word",
+            sourceIndex: 9,
+            value: "2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    message: "should correctly parse multiplication with spaces",
+    fixture: "calc(1 * 2)",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "calc",
+        before: "",
+        after: "",
+        nodes: [
+          {
+            type: "word",
+            sourceIndex: 5,
+            value: "1"
+          },
+          {
+            type: "space",
+            sourceIndex: 6,
+            value: " "
+          },
+          {
+            type: "word",
+            sourceIndex: 7,
+            value: "*"
+          },
+          {
+            type: "space",
+            sourceIndex: 8,
+            value: " "
+          },
+          {
+            type: "word",
+            sourceIndex: 9,
+            value: "2"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    message: "should correctly parse multiplication without spaces",
+    fixture: "calc(1*2)",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        value: "calc",
+        before: "",
+        after: "",
+        nodes: [
+          {
+            type: "word",
+            sourceIndex: 5,
+            value: "1"
+          },
+          {
+            type: "word",
+            sourceIndex: 6,
+            value: "*"
+          },
+          {
+            type: "word",
+            sourceIndex: 7,
+            value: "2"
+          }
+        ]
+      }
+    ]
+  },
+  {
     message: "should correctly process nested calc functions",
     fixture: "calc(((768px - 100vw) / 2) - 15px)",
     expected: [
