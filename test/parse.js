@@ -1148,6 +1148,60 @@ var tests = [
       { type: "space", sourceIndex: 10, value: " " },
       { type: "word", sourceIndex: 11, value: "-0" }
     ]
+  },
+  {
+    message: "should parse unicode-range (single codepoint)",
+    fixture: "U+26",
+    expected: [{ type: "unicode-range", sourceIndex: 0, value: "U+26" }]
+  },
+  {
+    message: "should parse unicode-range (single codepoint) 2",
+    fixture: "U+0-7F",
+    expected: [{ type: "unicode-range", sourceIndex: 0, value: "U+0-7F" }]
+  },
+  {
+    message: "should parse unicode-range (single codepoint) 3",
+    fixture: "U+0-7f",
+    expected: [{ type: "unicode-range", sourceIndex: 0, value: "U+0-7f" }]
+  },
+  {
+    message: "should parse unicode-range (single codepoint) (lowercase)",
+    fixture: "u+26",
+    expected: [{ type: "unicode-range", sourceIndex: 0, value: "u+26" }]
+  },
+  {
+    message: "should parse unicode-range (codepoint range)",
+    fixture: "U+0025-00FF",
+    expected: [{ type: "unicode-range", sourceIndex: 0, value: "U+0025-00FF" }]
+  },
+  {
+    message: "should parse unicode-range (wildcard range)",
+    fixture: "U+4??",
+    expected: [{ type: "unicode-range", sourceIndex: 0, value: "U+4??" }]
+  },
+  {
+    message: "should parse unicode-range (multiple values)",
+    fixture: "U+0025-00FF, U+4??",
+    expected: [
+      { type: "unicode-range", sourceIndex: 0, value: "U+0025-00FF" },
+      { type: "div", sourceIndex: 11, value: ",", before: "", after: " " },
+      { type: "unicode-range", sourceIndex: 13, value: "U+4??" }
+    ]
+  },
+  {
+    message: "should parse invalid unicode-range as word",
+    fixture: "U+4??Z",
+    expected: [{ type: "word", sourceIndex: 0, value: "U+4??Z" }]
+  },
+  {
+    message: "should parse invalid unicode-range as word 2",
+    fixture: "U+",
+    expected: [{ type: "word", sourceIndex: 0, value: "U+" }]
+  },
+  {
+    message: "should parse invalid unicode-range as word 2",
+    fixture: "U+Z",
+    expected: [{ type: "word", sourceIndex: 0, value: "U+Z" }]
   }
 ];
 
