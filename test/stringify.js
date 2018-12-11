@@ -69,6 +69,22 @@ var tests = [
   {
     message: "Should correctly process empty url whitespace characters",
     fixture: "url(  \n \t  \n  )"
+  },
+  {
+    message: "Should correctly process unicode-range (single codepoint)",
+    fixture: "U+26"
+  },
+  {
+    message: "Should correctly process unicode-range (codepoint range)",
+    fixture: "U+0025-00FF"
+  },
+  {
+    message: "Should correctly process unicode-range (wildcard range)",
+    fixture: "U+4??"
+  },
+  {
+    message: "Should correctly process unicode-range (multiple values)",
+    fixture: "U+0025-00FF, U+4??"
   }
 ];
 
