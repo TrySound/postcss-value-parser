@@ -53,6 +53,10 @@ var tests = [
   {
     fixture: "e",
     expected: false
+  },
+  {
+    fixture: "e1",
+    expected: false
   }
 ];
 
