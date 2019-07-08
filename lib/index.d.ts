@@ -121,7 +121,7 @@ declare namespace postcssValueParser {
      * @param callback A visitor callback that will be executed for each node
      * @param bubble   When set to `true`, walking will be done inside-out instead of outside-in
      */
-    walk(callback: WalkCallback, bubble: boolean = false): this;
+    walk(callback: WalkCallback, bubble?: boolean): this;
   }
 
   interface ValueParser {
@@ -149,7 +149,7 @@ declare namespace postcssValueParser {
      * @param callback A visitor callback that will be executed for each node
      * @param bubble   When set to `true`, walking will be done inside-out instead of outside-in
      */
-    walk(nodes: Node[], callback: WalkCallback, bubble: boolean = false): void;
+    walk(nodes: Node[], callback: WalkCallback, bubble?: boolean): void;
 
     /**
      * Parse a CSS value into a series of nodes to operate on
