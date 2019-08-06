@@ -12,15 +12,15 @@ var tests = [
   },
   {
     fixture: "2.",
-    expected: { number: "2.", unit: "" }
+    expected: { number: "2", unit: "." }
   },
   {
     fixture: "+2.",
-    expected: { number: "+2.", unit: "" }
+    expected: { number: "+2", unit: "." }
   },
   {
     fixture: "-2.",
-    expected: { number: "-2.", unit: "" }
+    expected: { number: "-2", unit: "." }
   },
   {
     fixture: "+-2.",
@@ -149,6 +149,126 @@ var tests = [
   {
     fixture: "-100.1e-1e-1px",
     expected: { number: "-100.1e-1", unit: "e-1px" }
+  },
+  {
+    fixture: ".5px",
+    expected: { number: ".5", unit: "px" }
+  },
+  {
+    fixture: "+.5px",
+    expected: { number: "+.5", unit: "px" }
+  },
+  {
+    fixture: "-.5px",
+    expected: { number: "-.5", unit: "px" }
+  },
+  {
+    fixture: ".5e1px",
+    expected: { number: ".5e1", unit: "px" }
+  },
+  {
+    fixture: "-.5e1px",
+    expected: { number: "-.5e1", unit: "px" }
+  },
+  {
+    fixture: "+.5e1px",
+    expected: { number: "+.5e1", unit: "px" }
+  },
+  {
+    fixture: ".5e1e1px",
+    expected: { number: ".5e1", unit: "e1px" }
+  },
+  {
+    fixture: ".5.5px",
+    expected: { number: ".5", unit: ".5px" }
+  },
+  {
+    fixture: "1e",
+    expected: { number: "1", unit: "e" }
+  },
+  {
+    fixture: "1e1",
+    expected: { number: "1e1", unit: "" }
+  },
+  {
+    fixture: "1ee",
+    expected: { number: "1", unit: "ee" }
+  },
+  {
+    fixture: "1e+",
+    expected: { number: "1", unit: "e+" }
+  },
+  {
+    fixture: "1e-",
+    expected: { number: "1", unit: "e-" }
+  },
+  {
+    fixture: "1e+1",
+    expected: { number: "1e+1", unit: "" }
+  },
+  {
+    fixture: "1e++1",
+    expected: { number: "1", unit: "e++1" }
+  },
+  {
+    fixture: "1e--1",
+    expected: { number: "1", unit: "e--1" }
+  },
+  {
+    fixture: "+10",
+    expected: { number: "+10", unit: "" }
+  },
+  {
+    fixture: "-10",
+    expected: { number: "-10", unit: "" }
+  },
+  {
+    fixture: ".2px",
+    expected: { number: ".2", unit: "px" }
+  },
+  {
+    fixture: "-.2px",
+    expected: { number: "-.2", unit: "px" }
+  },
+  {
+    fixture: "+.2px",
+    expected: { number: "+.2", unit: "px" }
+  },
+  {
+    fixture: ".a",
+    expected: false
+  },
+  {
+    fixture: ".",
+    expected: false
+  },
+  {
+    fixture: "+",
+    expected: false
+  },
+  {
+    fixture: "-",
+    expected: false
+  },
+  {
+    fixture: "-a",
+    expected: false
+  },
+  {
+    fixture: "+a",
+    expected: false
+  },
+  {
+    fixture: "+.a",
+    expected: false
+  },
+  {
+    fixture: "-.a",
+    expected: false
+  },
+  {
+    fixture: "",
+    expected: false
   }
 ];
 
