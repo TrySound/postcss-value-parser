@@ -1,6 +1,6 @@
 {
   "name": "postcss-value-parser",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "description": "Transforms css values and at-rule params into the tree",
   "main": "lib/index.js",
   "files": [
