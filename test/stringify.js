@@ -89,7 +89,7 @@ var tests = [
 ];
 
 test("Stringify", function(t) {
-  t.plan(tests.length + 3);
+  t.plan(tests.length + 4);
 
   tests.forEach(function(opts) {
     t.equal(stringify(parse(opts.fixture)), opts.fixture, opts.message);
@@ -131,4 +131,13 @@ test("Stringify", function(t) {
 
   tokens[1].type = "word";
   t.equal(stringify(tokens), " rgba ", "Shouldn't process nodes of work type");
+
+  t.equal(
+    stringify(parse("calc(1px + var(--bar))"), function(node) {
+      if (node.type === "function" && node.value === "var") {
+        return "10px";
+      }
+    }),
+    "calc(1px + 10px)"
+  );
 });
