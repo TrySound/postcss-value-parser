@@ -25,8 +25,8 @@ declare namespace postcssValueParser {
     before: string;
 
     /**
-    * The token at the end of the node
-    */
+     * The token at the end of the node
+     */
     after: string;
   }
 
