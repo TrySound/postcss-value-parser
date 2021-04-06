@@ -90,6 +90,32 @@ var tests = [
     ]
   },
   {
+    message: "should process interpolation",
+    fixture: "#{name()}",
+    options: {
+      interpolationPrefix: "#"
+    },
+    expected: [
+      {
+        type: "interpolation",
+        sourceIndex: 0,
+        value: "#",
+        before: "",
+        after: "",
+        nodes: [
+          {
+            type: "function",
+            sourceIndex: 2,
+            value: "name",
+            before: "",
+            after: "",
+            nodes: []
+          }
+        ]
+      }
+    ]
+  },
+  {
     message: "should process nested functions",
     fixture: "((()))",
     expected: [
@@ -1319,6 +1345,6 @@ test("Parse", function(t) {
   t.plan(tests.length);
 
   tests.forEach(function(opts) {
-    t.deepEqual(parse(opts.fixture), opts.expected, opts.message);
+    t.deepEqual(parse(opts.fixture, opts.options), opts.expected, opts.message);
   });
 });
