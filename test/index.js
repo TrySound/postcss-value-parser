@@ -21,7 +21,7 @@ test("ValueParser", function(tp) {
   });
 
   tp.test("walk", function(t) {
-    t.plan(4);
+    t.plan(5);
     var result;
 
     result = [];
@@ -70,6 +70,49 @@ test("ValueParser", function(tp) {
         }
       ],
       "should process all functions"
+    );
+
+    result = [];
+
+    parser("fn( ) #{fn2( fn3())}", { interpolationPrefix: "#" }).walk(function(
+      node
+    ) {
+      if (node.type === "interpolation") {
+        result.push(node);
+      }
+    });
+
+    t.deepEqual(
+      result,
+      [
+        {
+          type: "interpolation",
+          sourceIndex: 6,
+          value: "#",
+          before: "",
+          after: "",
+          nodes: [
+            {
+              type: "function",
+              sourceIndex: 8,
+              value: "fn2",
+              before: " ",
+              after: "",
+              nodes: [
+                {
+                  type: "function",
+                  sourceIndex: 13,
+                  value: "fn3",
+                  before: "",
+                  after: "",
+                  nodes: []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "should process all interpolations"
     );
 
     result = [];

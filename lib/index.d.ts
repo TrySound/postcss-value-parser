@@ -47,6 +47,18 @@ declare namespace postcssValueParser {
     nodes: Node[];
   }
 
+  interface InterpolationNode
+    extends BaseNode,
+      ClosableNode,
+      AdjacentAwareNode {
+    type: "interpolation";
+
+    /**
+     * Nodes inside the interpolation
+     */
+    nodes: Node[];
+  }
+
   interface SpaceNode extends BaseNode {
     type: "space";
   }
@@ -75,6 +87,7 @@ declare namespace postcssValueParser {
     | CommentNode
     | DivNode
     | FunctionNode
+    | InterpolationNode
     | SpaceNode
     | StringNode
     | UnicodeRangeNode
