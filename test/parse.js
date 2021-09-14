@@ -116,6 +116,70 @@ var tests = [
     ]
   },
   {
+    message: "should process interpolation with word",
+    fixture: "--#{name()}",
+    options: {
+      interpolationPrefix: "#"
+    },
+    expected: [
+      {
+        type: "word",
+        sourceIndex: 0,
+        value: "--"
+      },
+      {
+        type: "interpolation",
+        sourceIndex: 2,
+        value: "#",
+        before: "",
+        after: "",
+        nodes: [
+          {
+            type: "function",
+            sourceIndex: 4,
+            value: "name",
+            before: "",
+            after: "",
+            nodes: []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    message: "should process interpolation with divider (/)",
+    fixture: "/#{name()}",
+    options: {
+      interpolationPrefix: "#"
+    },
+    expected: [
+      {
+        type: "div",
+        sourceIndex: 0,
+        value: "/",
+        before: "",
+        after: ""
+      },
+      {
+        type: "interpolation",
+        sourceIndex: 1,
+        value: "#",
+        before: "",
+        after: "",
+        nodes: [
+          {
+            type: "function",
+            sourceIndex: 3,
+            value: "name",
+            before: "",
+            after: "",
+            nodes: []
+          }
+        ]
+      }
+    ]
+  },
+  {
     message: "should process nested functions",
     fixture: "((()))",
     expected: [

@@ -62,6 +62,20 @@ var tests = [
     }
   },
   {
+    message: "Should correctly process interpolation with word",
+    fixture: "-#{url(\n)}",
+    options: {
+      interpolationPrefix: "#"
+    }
+  },
+  {
+    message: "Should correctly process interpolation with divider (/)",
+    fixture: "/#{url(\n)}",
+    options: {
+      interpolationPrefix: "#"
+    }
+  },
+  {
     message: "Should correctly process empty url with newline (LF)",
     fixture: "url(\n\n\n)"
   },
