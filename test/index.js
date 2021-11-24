@@ -38,6 +38,7 @@ test("ValueParser", function(tp) {
         {
           type: "function",
           sourceIndex: 0,
+          sourceEndIndex: 5,
           value: "fn",
           before: " ",
           after: "",
@@ -46,6 +47,7 @@ test("ValueParser", function(tp) {
         {
           type: "function",
           sourceIndex: 6,
+          sourceEndIndex: 17,
           value: "fn2",
           before: " ",
           after: "",
@@ -53,6 +55,7 @@ test("ValueParser", function(tp) {
             {
               type: "function",
               sourceIndex: 11,
+              sourceEndIndex: 16,
               value: "fn3",
               before: "",
               after: "",
@@ -63,6 +66,7 @@ test("ValueParser", function(tp) {
         {
           type: "function",
           sourceIndex: 11,
+          sourceEndIndex: 16,
           value: "fn3",
           before: "",
           after: "",
@@ -90,6 +94,7 @@ test("ValueParser", function(tp) {
         {
           type: "function",
           sourceIndex: 0,
+          sourceEndIndex: 5,
           value: "fn",
           before: " ",
           after: "",
@@ -98,6 +103,7 @@ test("ValueParser", function(tp) {
         {
           type: "function",
           sourceIndex: 6,
+          sourceEndIndex: 17,
           value: "fn2",
           before: " ",
           after: "",
@@ -105,6 +111,7 @@ test("ValueParser", function(tp) {
             {
               type: "function",
               sourceIndex: 11,
+              sourceEndIndex: 16,
               value: "fn3",
               before: "",
               after: "",
@@ -131,6 +138,7 @@ test("ValueParser", function(tp) {
         {
           type: "function",
           sourceIndex: 0,
+          sourceEndIndex: 5,
           value: "fn",
           before: " ",
           after: "",
@@ -140,6 +148,7 @@ test("ValueParser", function(tp) {
         {
           type: "word",
           sourceIndex: 6,
+          sourceEndIndex: 17,
           value: "fn2",
           before: " ",
           after: "",
@@ -147,6 +156,7 @@ test("ValueParser", function(tp) {
             {
               type: "function",
               sourceIndex: 11,
+              sourceEndIndex: 16,
               value: "fn3",
               before: "",
               after: "",
@@ -172,6 +182,7 @@ test("ValueParser", function(tp) {
         {
           type: "function",
           sourceIndex: 5,
+          sourceEndIndex: 10,
           value: "fn3",
           before: "",
           after: "",
@@ -180,6 +191,7 @@ test("ValueParser", function(tp) {
         {
           type: "function",
           sourceIndex: 0,
+          sourceEndIndex: 11,
           value: "fn2",
           before: " ",
           after: "",
@@ -187,6 +199,7 @@ test("ValueParser", function(tp) {
             {
               type: "function",
               sourceIndex: 5,
+              sourceEndIndex: 10,
               value: "fn3",
               before: "",
               after: "",
