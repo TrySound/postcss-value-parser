@@ -144,7 +144,7 @@ test("ValueParser", function(tp) {
           after: "",
           nodes: []
         },
-        { type: "space", sourceIndex: 5, value: " " },
+        { type: "space", sourceIndex: 5, sourceEndIndex: 6, value: " " },
         {
           type: "word",
           sourceIndex: 6,

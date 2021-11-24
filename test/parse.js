@@ -80,7 +80,7 @@ var tests = [
         value: "",
         before: " ",
         after: " ",
-        nodes: [{ type: "word", sourceIndex: 2, value: "|" }]
+        nodes: [{ type: "word", sourceIndex: 2, sourceEndIndex: 3, value: "|" }]
       }
     ]
   },
@@ -221,7 +221,7 @@ var tests = [
         sourceIndex: 0,
         sourceEndIndex: 3,
         value: ",",
-        before: "",
+        before: " ",
         after: " "
       }
     ]
@@ -1005,7 +1005,7 @@ var tests = [
       {
         type: "function",
         sourceIndex: 0,
-        sourceEndIndex: 40,
+        sourceEndIndex: 39,
         value: "url",
         before: " ",
         after: " ",
@@ -1013,7 +1013,7 @@ var tests = [
           {
             type: "word",
             sourceIndex: 5,
-            sourceEndIndex: 38,
+            sourceEndIndex: 37,
             value: "http://website.com/assets\\)_test"
           }
         ]
