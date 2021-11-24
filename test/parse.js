@@ -1376,7 +1376,7 @@ var tests = [
       { type: "space", sourceIndex: 26, sourceEndIndex: 27, value: " " },
       { type: "word", sourceIndex: 27, sourceEndIndex: 30, value: "1px" },
       { type: "space", sourceIndex: 30, sourceEndIndex: 31, value: " " },
-      { type: "comment", sourceIndex: 31, sourceEndIndex: 42, value: "after" }
+      { type: "comment", sourceIndex: 31, sourceEndIndex: 40, value: "after" }
     ]
   },
   {
