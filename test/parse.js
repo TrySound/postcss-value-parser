@@ -1211,7 +1211,14 @@ var tests = [
         value: "url",
         before: "",
         after: "",
-        nodes: [{ type: "word", sourceIndex: 4, value: "foo/bar.jpg" }]
+        nodes: [
+          {
+            type: "word",
+            sourceIndex: 4,
+            sourceEndIndex: 15,
+            value: "foo/bar.jpg"
+          }
+        ]
       },
       {
         type: "div",
