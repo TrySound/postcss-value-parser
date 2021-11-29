@@ -15,7 +15,7 @@
     "tape": "^4.10.2"
   },
   "scripts": {
-    "lint:prettier": "prettier '**/*.js' '**/*.ts' --list-different",
+    "lint:prettier": "prettier \"**/*.js\" \"**/*.ts\" --list-different",
     "lint:js": "eslint . --cache",
     "lint": "yarn lint:js && yarn lint:prettier",
     "pretest": "yarn lint",
