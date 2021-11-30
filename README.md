@@ -261,3 +261,8 @@ Walks each node inside `parsed.nodes`. See the documentation for `valueParser.wa
 ## License
 
 MIT © [Bogdan Chadkin](mailto:trysound@yandex.ru)
+
+## See also
+
+[postcss-value-parser-deno](https://github.com/valtlai/postcss-value-parser-deno)
+(Deno port of this module)
