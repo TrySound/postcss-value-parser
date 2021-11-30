@@ -179,14 +179,14 @@ whether the first character in the argument is a quotation mark.
 
 ```js
 { type: 'function', sourceIndex: 0, value: 'url', before: ' ', after: ' ', nodes: [
-     type: 'string', sourceIndex: 5, quote: '"', value: '/gfx/img/bg.jpg' },
+    { type: 'string', sourceIndex: 5, quote: '"', value: '/gfx/img/bg.jpg' },
 ] }
 ```
 
 ### unicode-range
 
-The unicode-range CSS descriptor sets the specific range of characters to be 
-used from a font defined by @font-face and made available 
+The unicode-range CSS descriptor sets the specific range of characters to be
+used from a font defined by @font-face and made available
 for use on the current page (`unicode-range: U+0025-00FF`).
 
 Node-specific properties:
@@ -195,7 +195,7 @@ Node-specific properties:
 
 ## API
 
-```
+```js
 var valueParser = require('postcss-value-parser');
 ```
 
@@ -258,6 +258,6 @@ Stringifies the node tree.
 
 Walks each node inside `parsed.nodes`. See the documentation for `valueParser.walk()` above.
 
-# License
+## License
 
 MIT © [Bogdan Chadkin](mailto:trysound@yandex.ru)
