@@ -127,6 +127,11 @@ declare namespace postcssValueParser {
      * @param bubble   When set to `true`, walking will be done inside-out instead of outside-in
      */
     walk(callback: WalkCallback, bubble?: boolean): this;
+
+    /**
+     * Stringifies the node tree
+     */
+    toString(): string;
   }
 
   interface ValueParser {
