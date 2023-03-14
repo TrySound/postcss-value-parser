@@ -1652,6 +1652,52 @@ var tests = [
     expected: [
       { type: "word", sourceIndex: 0, sourceEndIndex: 3, value: "U+Z" }
     ]
+  },
+  {
+    message: "should correctly process url-prefix function",
+    fixture: "url-prefix( http://www.w3.org/Style/ )",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        sourceEndIndex: 38,
+        value: "url-prefix",
+        before: " ",
+        after: " ",
+        nodes: [
+          {
+            type: "word",
+            sourceIndex: 12,
+            sourceEndIndex: 36,
+            value: "http://www.w3.org/Style/"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    message:
+      "should correctly process url-prefix function with quoted first argument",
+    fixture: "url-prefix('http://www.w3.org/Style/')",
+    expected: [
+      {
+        type: "function",
+        sourceIndex: 0,
+        sourceEndIndex: 38,
+        value: "url-prefix",
+        before: "",
+        after: "",
+        nodes: [
+          {
+            type: "string",
+            sourceIndex: 11,
+            sourceEndIndex: 37,
+            value: "http://www.w3.org/Style/",
+            quote: "'"
+          }
+        ]
+      }
+    ]
   }
 ];
 
